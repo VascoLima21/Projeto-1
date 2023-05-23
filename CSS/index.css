@@ -1,0 +1,20 @@
+#navbar {
+    display: flex;
+}
+
+#icon {
+    align-self: flex-start;
+}
+
+#logo {
+    align-self: center;
+}
+
+
+
+#logInButton {
+    background-color: white;
+    border: none;
+    color: black;
+    text-decoration: underline;
+}

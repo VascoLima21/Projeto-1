@@ -1,0 +1,22 @@
+#buttonStart {
+    background: #F0F2A6;
+    border-radius: 8.54922px;
+    padding: 30px;
+
+}
+
+h3 {
+    align-self: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width: 915px;
+    height: 454px;
+    border-radius: 21.3386px;
+    top: 433px;
+    background: #EAEAEA33;
+
+}

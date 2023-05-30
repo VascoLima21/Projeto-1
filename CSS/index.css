@@ -2,19 +2,53 @@
     display: flex;
 }
 
-#icon {
-    align-self: flex-start;
+h1 {
+    display:flex;
+    justify-content: center;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
-#logo {
-    align-self: center;
+h3 {
+    
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+
+    color: #FFFFFF;
 }
 
+#boxText {
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 21.3386px;
+}
 
+#registerButton {
+    background: #F0F2A6;
+    border-radius: 10px;
+}
 
 #logInButton {
     background-color: white;
     border: none;
     color: black;
     text-decoration: underline;
+}
+
+.bgLanding {
+    background-image: url("../images/backgrounds/landingPageBG.jpg");
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }

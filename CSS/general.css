@@ -1,9 +1,48 @@
-.icon{
+.icon {
     width: 300px;
     height: 300px;
 }
 
-.logo{
-    width: 300px;
-    height: 300px;
+.logo {
+    width: 173px;
+    height: 173px;
+}
+
+#navbar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#navbar .rectangle {
+    justify-content: center;
+
+    width: 1037px;
+    height: 25px;
+
+    top: 130px;
+
+    background: #F0F2A6;
+    border-radius: 10px;
+}
+
+#navbar a {
+    color: #eaeaea;
+    text-decoration: none;
+    font-size: 36px;
+    padding: 52px
+}
+
+#navbar a:hover {
+    text-decoration: underline;
+}
+
+.bg {
+    background-image: url("../images/backgrounds/generalBG.jpg");
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
 }

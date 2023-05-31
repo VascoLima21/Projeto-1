@@ -23,7 +23,7 @@ function initdata() {
             password: "jackBlack321",
             type: "admin",
             bestTime: NaN,
-            profilePic: "default",
+            profilePic: "../images/icons/defaultIcon.png",
             description: "",
             email: "liam@gmail.com",
             country: "portugal",

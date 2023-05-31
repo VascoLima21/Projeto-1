@@ -39,7 +39,7 @@ export function isLogged() {
   return sessionStorage.getItem("loggedUser") ? true : false;
 }
 
-// DEVOLVE UTILZIADOR AUTENTICADO
+// DEVOLVE UTILIzADOR AUTENTICADO
 export function getUserLogged() {
   return JSON.parse(sessionStorage.getItem("loggedUser"));
 }
@@ -50,13 +50,13 @@ export function getUserLogged() {
 class User {
   username= "";
   password= "";
-  type= "admin";
+  type= "";
   bestTime= NaN;
-  profilePic= "default";
+  profilePic= "../images/icons/defaultIcon.png";
   description= "";
-  email= "liam@gmail.com";
-  country= "portugal";
-  gender= "male";
+  email= "";
+  country= "";
+  gender= "";
   achievements= [];
   timesCompleted= 0;
 

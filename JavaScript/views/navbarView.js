@@ -1,15 +1,21 @@
+import * as User from "../modules/userModule.js";
+
 // Cria uma navbar
 function createNavbar() {
+    User.init();
     // Cria a div da navbar
     var navbar = document.querySelector("#navbar");
     var rectangle = document.createElement("span");
+    var userPfp= document.createElement("div");
+    userPfp.className= "userPfpFrame"
+    userPfp.style.background= 
     rectangle.className = "rectangle";
 
     // Cria o Ícone Como um link
     var iconLink = document.createElement("a");
     iconLink.href = "../HTML/homePage.html";
 
-    // Cria a imagem
+    // Cria a imagem do Ícone
     var icon = document.createElement("img");
     icon.className= "icon"
     icon.src = "../images/logo/Stellar Escape Logo Final BW R.svg";
@@ -35,6 +41,7 @@ function createNavbar() {
     }
 
     navbar.appendChild(rectangle);
+    navbar.appendChild(userPfp);
 }
 
 // Define o link ativo

@@ -20,6 +20,7 @@
 #navbar {
     display: flex;
     justify-content: center;
+    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
 }
@@ -34,6 +35,13 @@
 
     background: #F0F2A6;
     border-radius: 10px;
+}
+
+#navbar .userPfpFrame{
+    border-radius: 100px;
+    width: 130px;
+    height: 130px;
+    border: 3.00637px solid #FFFFFF;
 }
 
 #navbar a {

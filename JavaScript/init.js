@@ -15,6 +15,7 @@ function initdata() {
             country: "portugal",
             gender: "male",
             achievements: [],
+            timesCompleted: 0,
 
           },
           {
@@ -28,6 +29,7 @@ function initdata() {
             country: "portugal",
             gender: "male",
             achievements: [],
+            timesCompleted: 0,
           },
     ];
     localStorage.setItem("users", JSON.stringify(users));

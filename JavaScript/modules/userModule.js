@@ -57,7 +57,8 @@ class User {
   email= "liam@gmail.com";
   country= "portugal";
   gender= "male";
-  achievements= []
+  achievements= [];
+  timesCompleted= 0;
 
   constructor(username, password,type,bestTime,profilePic,description,email,country,gender, achievements) {
     this.username = username;
@@ -70,5 +71,6 @@ class User {
     this.country = country;
     this.gender = gender;
     this.achievements = achievements;
+    this.timesCompleted = timesCompleted;
   }
 }

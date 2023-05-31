@@ -3,13 +3,19 @@ import * as User from "../modules/userModule.js";
 // Cria uma navbar
 function createNavbar() {
     User.init();
+
+    //Vai buscar o utilizador que está logado
+    var user= User.getUserLogged();
+    
     // Cria a div da navbar
     var navbar = document.querySelector("#navbar");
     var rectangle = document.createElement("span");
     var userPfp= document.createElement("div");
     userPfp.className= "userPfpFrame"
-    userPfp.style.background= 
+    userPfp.style.backgroundImage= `url(${user.profilePic})`;
     rectangle.className = "rectangle";
+    console.log(user.profilePic)
+    console.log(user)
 
     // Cria o Ícone Como um link
     var iconLink = document.createElement("a");

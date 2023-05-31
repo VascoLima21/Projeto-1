@@ -42,6 +42,9 @@
     width: 130px;
     height: 130px;
     border: 3.00637px solid #FFFFFF;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #navbar a {

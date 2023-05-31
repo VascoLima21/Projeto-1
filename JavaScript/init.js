@@ -9,7 +9,7 @@ function initdata() {
             password: "ronaldO123",
             type: "admin",
             bestTime: NaN,
-            profilePic: "default",
+            profilePic: "../images/icons/defaultIcon.png",
             description: "",
             email: "tteixeira@esmad.ipp.pt",
             country: "portugal",

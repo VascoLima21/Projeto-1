@@ -60,7 +60,7 @@ class User {
   achievements= [];
   timesCompleted= 0;
 
-  constructor(username, password,type,bestTime,profilePic,description,email,country,gender, achievements) {
+  constructor(username, password,type,bestTime,profilePic,description,email,country,gender, achievements,timesCompleted) {
     this.username = username;
     this.password = password;
     this.type = type;

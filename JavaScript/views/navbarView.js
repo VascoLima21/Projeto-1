@@ -46,8 +46,8 @@ function createNavbar() {
         navbar.appendChild(link);
     }
 
-    navbar.appendChild(rectangle);
     navbar.appendChild(userPfp);
+    navbar.appendChild(rectangle);
 }
 
 // Define o link ativo

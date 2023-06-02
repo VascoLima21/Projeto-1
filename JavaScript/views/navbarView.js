@@ -50,14 +50,5 @@ function createNavbar() {
     navbar.appendChild(rectangle);
 }
 
-// Define o link ativo
-function setActiveLink(clickedLink) {
-    var links = document.querySelector("#navbar").getElementsByTagName("a");
-    for (var i = 0; i < links.length; i++) {
-        links[i].classList.remove("active");
-    }
-    clickedLink.classList.add("active");
-}
-
 // Chama a função para criar a navbar
 createNavbar();

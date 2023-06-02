@@ -3,52 +3,83 @@
 }
 
 h1 {
-    display:flex;
+    display: flex;
     justify-content: center;
-
+    padding-top: 150px;
     font-style: normal;
-    font-weight: 700;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
 }
 
-h3 {
-    
+#introText {
+    align-content: center;
     font-style: normal;
     font-weight: 700;
-    font-size: 32px;
+    font-size: 30px;
     line-height: 39px;
-
     color: #FFFFFF;
 }
 
 #boxText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 100px;
     padding: 40px;
+    height: 300px;
     background: rgba(0, 0, 0, 0.35);
     border-radius: 21.3386px;
 }
 
-#registerButton {
-    background: #F0F2A6;
-    border-radius: 10px;
+
+
+.starS{
+    height: 32px;
+    width: 35px;
 }
 
-#logInButton {
-    background-color: white;
+.starM{
+    height: 45px;
+    width:49px;
+}
+
+.starL{
+    height: 63px;
+    width:68px;
+}
+
+#registerButton {
+    margin-top: 50px;
+    width: 350px;
+    height: 150px;
+    background: #F0F2A6;
+    border-radius: 10px;
+    font-size: 28px;
+    color: #1E1E1E;
+}
+
+#preLogText{
+    font-size: 25px;
+}
+
+#logInText{
+    margin-top: 20px;
+}
+
+#logInButton {  
+    background: none;
     border: none;
-    color: black;
+    color: white;
     text-decoration: underline;
+    font-size: 23px;
 }
 
 .bgLanding {
-    background-image: url("../images/backgrounds/landingPageBG.jpg");
+    background-image: url("../images/backgrounds/landingPageBg.jpg");
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+    background-size: 100% 100%;
     display: flex;
     flex-direction: column;
 }

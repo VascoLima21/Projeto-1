@@ -3,8 +3,18 @@
     src: url("../fonts/GuardiansRegular-6M0q.ttf") format("truetype");
   }
 
-.title{
+@font-face {
+    font-family: "Speedy";
+    src: url("../fonts/SpeedyRegular-7BLoE.ttf") format("truetype");
+}
+
+
+.guardians{
     font-family: "Guardians";
+}
+
+.speedy{
+    font-family: "Speedy";
 }
 
 .icon {

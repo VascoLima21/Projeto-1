@@ -13,7 +13,7 @@ export function register(username, password, email, country, gender) {
   } else if (users.some((user) => user.email === email)) {
     throw Error(`User with email "${email}" already exists!`);
   }else {
-    userLogged= new User(username, password, email, country, gender);
+    userLogged= new User(username, password, email, country, gender, NaN, "../images/icons/defaultIcon.png", "", "user", [], 0);
     users.push(userLogged);
     sessionStorage.setItem("loggedUser", JSON.stringify(userLogged));
     localStorage.setItem("users", JSON.stringify(users));

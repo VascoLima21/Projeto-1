@@ -1,4 +1,5 @@
 let users;
+let userLogged;
 
 // CARREGAR UTILIZADORES DA LOCALSTORAGE
 export function init() {
@@ -6,13 +7,15 @@ export function init() {
 }
 
 // ADICIONAR UTILIZADOR
-export function register(username, password, email) {
+export function register(username, password, email, country, gender) {
   if (users.some((user) => user.username === username)) {
     throw Error(`User with username "${username}" already exists!`);
   } else if (users.some((user) => user.email === email)) {
     throw Error(`User with email "${email}" already exists!`);
   }else {
-    users.push(new User(username, password));
+    userLogged= new User(username, password, email, country, gender);
+    users.push(userLogged);
+    sessionStorage.setItem("loggedUser", JSON.stringify(userLogged));
     localStorage.setItem("users", JSON.stringify(users));
   }
 }
@@ -24,7 +27,6 @@ export function login(username, password) {
   );
   if (user) {
     sessionStorage.setItem("loggedUser", JSON.stringify(user));
-    // window.location.href= "../HTML/homePage.html";
     return true;
   } else {
     throw Error("Invalid login!");
@@ -52,26 +54,26 @@ export function getUserLogged() {
 class User {
   username= "";
   password= "";
-  type= "user";
-  bestTime= NaN;
-  profilePic= "../images/icons/defaultIcon.png";
-  description= "";
   email= "";
   country= "";
   gender= "";
+  bestTime= NaN;
+  profilePic= "../images/icons/defaultIcon.png";
+  description= "";
+  type= "user";
   achievements= [];
   timesCompleted= 0;
 
-  constructor(username, password,type,bestTime,profilePic,description,email,country,gender, achievements,timesCompleted) {
+  constructor(username, password, email, country, gender,bestTime,profilePic,description,type,achievements,timesCompleted) {
     this.username = username;
     this.password = password;
-    this.type = type;
-    this.bestTime = bestTime;
-    this.profilePic = profilePic;
-    this.description = description;
     this.email = email;
     this.country = country;
     this.gender = gender;
+    this.bestTime = bestTime;
+    this.profilePic = profilePic;
+    this.description = description;
+    this.type = type;
     this.achievements = achievements;
     this.timesCompleted = timesCompleted;
   }

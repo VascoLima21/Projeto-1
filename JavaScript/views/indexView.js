@@ -2,7 +2,7 @@ import * as User from "../modules/userModule.js";
 
 function userAutenthification() {
     User.init();
-    
+
     // CLICAR NO BOTÃO DE REGISTAR
     document
         .querySelector("#registerForm")
@@ -20,7 +20,7 @@ function userAutenthification() {
                 if (registerPassword.value !== registerPassword2.value) {
                     throw Error("Password and Confirm Password are not equal");
                 }
-                User.register(registerUsername.value, registerPassword.value, registerCountry.value, registerGender.value, registerEmail.value);
+                User.register(registerUsername.value, registerPassword.value, registerEmail.value, registerCountry.value, registerGender.value);
                 displayMessage(
                     "alertRegister",
                     "User registered with success!",

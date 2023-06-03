@@ -2,7 +2,7 @@ import * as User from "../modules/userModule.js";
 
 function userAutenthification() {
     User.init();
-
+    
     // CLICAR NO BOTÃO DE REGISTAR
     document
         .querySelector("#registerForm")
@@ -12,14 +12,18 @@ function userAutenthification() {
             const registerUsername = document.getElementById("txtRegisterUsername");
             const registerPassword = document.getElementById("txtRegisterPassword");
             const registerPassword2 = document.getElementById("txtRegisterConfPassword");
+            const registerCountry = document.getElementById("txtRegisterCountry");
+            const registerGender = document.getElementById("txtRegisterGender");
+            const registerEmail = document.getElementById("txtRegisterEmail");
+
             try {
                 if (registerPassword.value !== registerPassword2.value) {
                     throw Error("Password and Confirm Password are not equal");
                 }
-                User.add(registerUsername.value, registerPassword.value);
+                User.register(registerUsername.value, registerPassword.value, registerCountry.value, registerGender.value, registerEmail.value);
                 displayMessage(
                     "alertRegister",
-                    "User registered with success!",    
+                    "User registered with success!",
                     "success"
                 );
                 // Wait 1 second before reloading, so the user can see the login success message

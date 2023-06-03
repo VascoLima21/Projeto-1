@@ -6,10 +6,12 @@ export function init() {
 }
 
 // ADICIONAR UTILIZADOR
-export function add(username, password) {
+export function register(username, password, email) {
   if (users.some((user) => user.username === username)) {
     throw Error(`User with username "${username}" already exists!`);
-  } else {
+  } else if (users.some((user) => user.email === email)) {
+    throw Error(`User with email "${email}" already exists!`);
+  }else {
     users.push(new User(username, password));
     localStorage.setItem("users", JSON.stringify(users));
   }
@@ -50,7 +52,7 @@ export function getUserLogged() {
 class User {
   username= "";
   password= "";
-  type= "";
+  type= "user";
   bestTime= NaN;
   profilePic= "../images/icons/defaultIcon.png";
   description= "";

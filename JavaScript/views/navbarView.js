@@ -5,7 +5,7 @@ function createNavbar() {
     User.init();
 
     //Vai buscar o utilizador que está logado
-    var user= User.getUserLogged();
+    var user= User.getUserLogged(); 
     
     // Cria a div da navbar
     var navbar = document.querySelector("#navbar");
@@ -23,7 +23,7 @@ function createNavbar() {
 
     // Cria a imagem do Ícone
     var icon = document.createElement("img");
-    icon.className= "icon"
+    icon.className= "logo"
     icon.src = "../images/logo/Stellar Escape Logo Final BW R.svg";
 
     // Adiciona a imagem como filho do link

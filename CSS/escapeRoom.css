@@ -1,0 +1,67 @@
+#heading {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+
+#rightLayout{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    align-items: center;
+
+}
+
+#logoEscapeRoom {
+    width: 220px;
+    height: 220px;
+    align-self: center;
+}
+
+#progressBar{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    background: #FFFFFF;
+    border-radius: 10px;
+    height: 40px;
+    width: 1000px;
+}
+
+#barFill{
+    height:40px;
+    border-radius: 10px;
+    background: #F50623;
+    transition: width 0.3s ease-in-out;
+}
+
+#rocketDiv{
+    align-self: center;
+}
+
+#rocketDecoration{
+    width: 100px;
+    height:100px;
+}
+
+#sunDecoration{
+    justify-content: flex-end;
+}
+
+#burgerEscapeRoom {
+    width: 80px;
+    height: 80px;
+    align-self: center;
+}
+
+#timer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 1px solid #FFFFFF;
+    border-radius: 7px;
+    color: #fff;
+    width: 70px;
+    height: 30px;
+}

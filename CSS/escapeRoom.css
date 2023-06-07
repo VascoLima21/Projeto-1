@@ -4,13 +4,18 @@
     align-content: center;
 }
 
+button{
+    background: none;
+    border: none;
+}
+
 #rightLayout{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: flex-end;
     align-items: center;
-
+    justify-content: center;
 }
 
 #logoEscapeRoom {
@@ -64,4 +69,20 @@
     color: #fff;
     width: 70px;
     height: 30px;
+}
+
+
+#escapeRoom{
+    justify-content: center;
+}
+#escapeRoomBg{
+    background-color: #EAEAEA;
+    width: 1500px;
+    height: 750px;
+}
+
+.escapeRoomFloor{}
+
+.bgRocket{
+
 }

@@ -35,7 +35,7 @@ challengesCompleted.appendChild(challengesCompElement);
 //Barra de Progresso
 
 // Largura da Barra de Progresso em Percentagem
-const progress = 0;
+const progress = 20;
 
 // Calcular a posição do foguetão e da Janelinha com o Progresso
 

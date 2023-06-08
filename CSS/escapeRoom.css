@@ -25,6 +25,7 @@ button{
 }
 
 #progressBar{
+    position: relative;
     display: flex;
     flex-direction: row;
     align-self: center;
@@ -35,6 +36,7 @@ button{
 }
 
 #barFill{
+    position: absolute;
     height:40px;
     border-radius: 10px;
     background: #F50623;
@@ -51,7 +53,11 @@ button{
 }
 
 #sunDecoration{
-    justify-content: flex-end;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: -10px;
 }
 
 #burgerEscapeRoom {
@@ -71,18 +77,11 @@ button{
     height: 30px;
 }
 
-
 #escapeRoom{
     justify-content: center;
 }
 #escapeRoomBg{
     background-color: #EAEAEA;
     width: 1500px;
-    height: 750px;
-}
-
-.escapeRoomFloor{}
-
-.bgRocket{
-
+    height: 600px;
 }

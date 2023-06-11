@@ -273,6 +273,12 @@ function showChallengeMonitor(currentChallenge) {
   } else if (currentChallenge === 2) {
     monitorChallenge.innerHTML = '';
   }
+  // Event listener para o botão dentro do modal
+  const nextChallengeButton = document.getElementById("rightArrowChallengeMonitor");
+  if (nextChallengeButton) {
+    nextChallengeButton.removeEventListener("click", handleNextChallengeButton);
+    nextChallengeButton.addEventListener("click", handleNextChallengeButton);
+  }
 }
 
 let currentChallengeMonitor = 1;
@@ -292,20 +298,15 @@ if (rightMonitorInteraction) {
   });
 }
 
-// Event listener para o botão dentro do modal
-const nextChallengeButton = document.getElementById("rightArrowChallengeMonitor");
-if (nextChallengeButton) {
-  nextChallengeButton.removeEventListener("click", handleNextChallengeButton);
-  nextChallengeButton.addEventListener("click", handleNextChallengeButton);
+
+
+function nextChallenge(currentChallenge) {
+  currentChallenge += 1;
+  return currentChallenge;
 }
 
 function handleNextChallengeButton() {
   console.log(currentChallengeMonitor);
   currentChallengeMonitor = nextChallenge(currentChallengeMonitor);
   showChallengeMonitor(currentChallengeMonitor);
-}
-
-function nextChallenge(currentChallenge) {
-  currentChallenge += 1;
-  return currentChallenge;
 }

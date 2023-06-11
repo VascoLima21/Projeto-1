@@ -4,12 +4,12 @@
     align-content: center;
 }
 
-button{
+button {
     background: none;
     border: none;
 }
 
-#rightLayout{
+#rightLayout {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -24,7 +24,7 @@ button{
     align-self: center;
 }
 
-#progressBar{
+#progressBar {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -35,24 +35,24 @@ button{
     width: 1000px;
 }
 
-#barFill{
+#barFill {
     position: absolute;
-    height:40px;
+    height: 40px;
     border-radius: 10px;
     background: #F50623;
     transition: width 0.3s ease-in-out;
 }
 
-#rocketDiv{
+#rocketDiv {
     align-self: center;
 }
 
-#rocketDecoration{
+#rocketDecoration {
     width: 100px;
-    height:100px;
+    height: 100px;
 }
 
-#sunDecoration{
+#sunDecoration {
     height: 100px;
     position: absolute;
     top: 0;
@@ -77,11 +77,31 @@ button{
     height: 30px;
 }
 
-#escapeRoom{
+#escapeRoom {
     justify-content: center;
 }
-#escapeRoomBg{
+
+#escapeRoomBg {
     background-color: #EAEAEA;
     width: 1500px;
     height: 600px;
+}
+
+#solarSystemPuzzle {
+    width: 400px;
+}
+
+#screenPassword {
+    background: #FFFFFF;
+    border: 2.68327px solid #04082B;
+}
+
+#monitorChallenges {
+    border: 2px solid black;
+}
+
+.modal-dialog-centered .modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

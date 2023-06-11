@@ -6,7 +6,7 @@ export function init() {
   users = localStorage.users ? JSON.parse(localStorage.users) : [];
 }
 
-// ADICIONAR UTILIZADOR
+// Register User
 export function register(username, password, email, country, gender) {
   if (users.some((user) => user.username === username)) {
     throw Error(`User with username "${username}" already exists!`);
@@ -20,7 +20,7 @@ export function register(username, password, email, country, gender) {
   }
 }
 
-// LOGIN DO UTILIZADOR
+// User LogIn
 export function login(username, password) {
   const user = users.find(
     (user) => user.username === username && user.password === password
@@ -33,24 +33,25 @@ export function login(username, password) {
   }
 }
 
-// LOGOUT DO UTILIZADOR
+// User LogOut
 export function logout() {
   sessionStorage.removeItem("loggedUser");
 }
 
-// VERIFICA EXISTÊNCIA DE ALGUÉM AUTENTICADO
+// Verifies if someone is logged in
 export function isLogged() {
   return sessionStorage.getItem("loggedUser") ? true : false;
 }
 
-// DEVOLVE UTILIzADOR AUTENTICADO
+// Returns logged user
 export function getUserLogged() {
   return JSON.parse(sessionStorage.getItem("loggedUser"));
 }
 
 /**
- * CLASSE QUE MODELA UM UTILIZADOR NA APLICAÇÃO
+ * CLASS that models an user in the app
  */
+
 class User {
   username= "";
   password= "";

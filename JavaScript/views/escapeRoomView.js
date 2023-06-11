@@ -296,10 +296,11 @@ if (rightMonitorInteraction) {
 const nextChallengeButton = document.getElementById("rightArrowChallengeMonitor");
 if (nextChallengeButton) {
   nextChallengeButton.removeEventListener("click", handleNextChallengeButton);
-  nextChallengeButton.addEventListener("click", handleRightArrowClick);
+  nextChallengeButton.addEventListener("click", handleNextChallengeButton);
 }
 
 function handleNextChallengeButton() {
+  console.log(currentChallengeMonitor);
   currentChallengeMonitor = nextChallenge(currentChallengeMonitor);
   showChallengeMonitor(currentChallengeMonitor);
 }

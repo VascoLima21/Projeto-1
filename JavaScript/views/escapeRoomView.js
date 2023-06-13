@@ -179,8 +179,20 @@ function showRoom(currentRoom) {
           <img src="../images/interactions/arrowLeft.svg">
         </button>
         <div>
-          <img id="solarSystemPuzzle" src="../images/interactions/room1/solarSystemGame.jpg" alt="">
+          <img src="../images/interactions/room1/Solar System Puzzle/solarSystemPuzzleBg.svg" id="solarSystemPuzzleBg">
+          <div id="planetsPuzzle">
+            <img class="position1" src="../images/interactions/room1/Solar System Puzzle/Mercury.svg" id="mercuryPuzzle">
+            <img class="position2" src="../images/interactions/room1/Solar System Puzzle/Venus.svg" id="venusPuzzle">
+            <img class="position3" src="../images/interactions/room1/Solar System Puzzle/Earth.svg" id="earthPuzzle">
+            <img class="position4" src="../images/interactions/room1/Solar System Puzzle/Mars.svg" id="marsPuzzle">
+            <img class="position5" src="../images/interactions/room1/Solar System Puzzle/Jupiter.svg" id="jupiterPuzzle">
+            <img class="position6" src="../images/interactions/room1/Solar System Puzzle/Saturn.svg" id="saturnPuzzle">
+            <img class="position7" src="../images/interactions/room1/Solar System Puzzle/Uranus.svg" id="uranusPuzzle">
+            <img class="position8" src="../images/interactions/room1/Solar System Puzzle/Neptune.svg" id="neptunePuzzle">
+          </div>
         </div>
+
+
         <div id='inventoryBar'>
           <table>
             <tr style='background-color: #3B3B3B;'>
@@ -193,7 +205,6 @@ function showRoom(currentRoom) {
             </tr> 
           </table> 
         </div>
-      </div>
       </div>
       `;
   }
@@ -297,8 +308,6 @@ if (rightMonitorInteraction) {
     // código para exibir a modal do monitorChallenge da direita
   });
 }
-
-
 
 function nextChallenge(currentChallenge) {
   currentChallenge += 1;

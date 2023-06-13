@@ -105,3 +105,12 @@ button {
     justify-content: center;
     align-items: center;
 }
+
+#solarSystemPuzzleBg{
+    background-image: url("../images/interactions/room1/Solar System Puzzle/solarSystemPuzzleBg.png");
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    
+}

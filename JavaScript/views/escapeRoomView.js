@@ -178,17 +178,16 @@ function showRoom(currentRoom) {
         <button id="leftArrowMain">
           <img src="../images/interactions/arrowLeft.svg">
         </button>
-        <div>
-          <img src="../images/interactions/room1/Solar System Puzzle/solarSystemPuzzleBg.svg" id="solarSystemPuzzleBg">
+        <div id="solarSystemPuzzleBg">
           <div id="planetsPuzzle">
-            <img class="position1" src="../images/interactions/room1/Solar System Puzzle/Mercury.svg" id="mercuryPuzzle">
-            <img class="position2" src="../images/interactions/room1/Solar System Puzzle/Venus.svg" id="venusPuzzle">
-            <img class="position3" src="../images/interactions/room1/Solar System Puzzle/Earth.svg" id="earthPuzzle">
-            <img class="position4" src="../images/interactions/room1/Solar System Puzzle/Mars.svg" id="marsPuzzle">
-            <img class="position5" src="../images/interactions/room1/Solar System Puzzle/Jupiter.svg" id="jupiterPuzzle">
-            <img class="position6" src="../images/interactions/room1/Solar System Puzzle/Saturn.svg" id="saturnPuzzle">
-            <img class="position7" src="../images/interactions/room1/Solar System Puzzle/Uranus.svg" id="uranusPuzzle">
-            <img class="position8" src="../images/interactions/room1/Solar System Puzzle/Neptune.svg" id="neptunePuzzle">
+            <img class="position1" src="../images/interactions/room1/Solar System Puzzle/Mercury.png" id="mercuryPuzzle">
+            <img class="position2" src="../images/interactions/room1/Solar System Puzzle/Venus.png" id="venusPuzzle">
+            <img class="position3" src="../images/interactions/room1/Solar System Puzzle/Earth.png" id="earthPuzzle">
+            <img class="position4" src="../images/interactions/room1/Solar System Puzzle/Mars.png" id="marsPuzzle">
+            <img class="position5" src="../images/interactions/room1/Solar System Puzzle/Jupiter.png" id="jupiterPuzzle">
+            <img class="position6" src="../images/interactions/room1/Solar System Puzzle/Saturn.png" id="saturnPuzzle">
+            <img class="position7" src="../images/interactions/room1/Solar System Puzzle/Uranus.png" id="uranusPuzzle">
+            <img class="position8" src="../images/interactions/room1/Solar System Puzzle/Neptune.png" id="neptunePuzzle">
           </div>
         </div>
 
@@ -208,6 +207,7 @@ function showRoom(currentRoom) {
       </div>
       `;
   }
+
 
   const rightArrowMain = document.getElementById("rightArrowMain");
   if (rightArrowMain) {
@@ -243,6 +243,34 @@ function moveRight(currentRoom) {
   currentRoom += 0.5;
   return currentRoom;
 }
+
+// Function that shuffles the images
+// function shuffleImages(images) {
+//   for (let i = images.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [images[i], images[j]] = [images[j], images[i]];
+//   }
+//   return images;
+// }
+
+// Gets the div that contains the images
+// const planetsPuzzleDiv = document.getElementById('planetsPuzzle');
+
+// Gets all the images in the div
+// const images = Array.from(planetsPuzzleDiv.getElementsByTagName('img'));
+
+// Shuffles the Images and Stores the Array in shuffledImages
+// const shuffledImages = shuffleImages(images);
+
+// Removes the Images From the Div
+// images.forEach((image) => {
+//   planetsPuzzleDiv.removeChild(image);
+// });
+
+// Adds the shuffled images to the Div in the new order
+// shuffledImages.forEach((image) => {
+//   planetsPuzzleDiv.appendChild(image);
+// });
 
 // if (Number.isInteger(currentRoom)) {
 //   escapeRoomDiv.className= "d-flex mainRoom"

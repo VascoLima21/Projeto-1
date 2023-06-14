@@ -107,7 +107,7 @@ button {
 }
 
 #solarSystemPuzzleBg{
-    background-image: url("../images/interactions/room1/Solar System Puzzle/solarSystemPuzzleBg2.png");
+    background-image: url("../images/interactions/room1/Solar System Puzzle/roomRightBg/413655-PE6M3U-171.jpg");
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
@@ -115,41 +115,44 @@ button {
 }
 
 .position1{
-    height:50%;
+    height:350px;
     width: auto;
 }
 
 .position2{
-    height:50%;
-    width: auto;
-}
-
-.position4{
-    height:50%;
-    width: auto;
-}
-
-.position6{
-    height:50%;
+    height:350px;
     width: auto;
 }
 
 .position3{
-    height:50%;
+    height:350px;
     width: auto;
 }
-
-.position7{
-    height:50%;
-    width: auto;
-}
-
-.position8{
-    height:50%;
+.position4{
+    height:350px;
     width: auto;
 }
 
 .position5{
-    height:50%;
+    height:350px;
     width: auto;
+}
+
+.position6{
+    height:350px;
+    width: auto;
+}
+
+.position7{
+    height:350px;
+    width: auto;
+}
+
+.position8{
+    height:350px;
+    width: auto;
+}
+
+#inventoryBar{
+    display: flex;
 }

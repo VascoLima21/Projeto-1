@@ -180,14 +180,30 @@ function showRoom(currentRoom) {
             <img src="../images/interactions/arrowLeft.svg">
           </button>
             <div id="solarSystemPuzzleBg" class="d-flex align-items-center">
+            <button id="buttonPosition1">
                 <img class="position1" src="../images/interactions/room1/Solar System Puzzle/Mercury.png" id="mercuryPuzzle">      
+            </button>
+            <button id="buttonPosition2">
                 <img class="position2" src="../images/interactions/room1/Solar System Puzzle/Venus.png" id="venusPuzzle">
+            </button>
+            <button id="buttonPosition3">
                 <img class="position3" src="../images/interactions/room1/Solar System Puzzle/Earth.png" id="earthPuzzle">
+            </button>
+            <button id="buttonPosition4">
                 <img class="position4" src="../images/interactions/room1/Solar System Puzzle/Mars.png" id="marsPuzzle">
+            </button>
+            <button id="buttonPosition5">
                 <img class="position5" src="../images/interactions/room1/Solar System Puzzle/Jupiter.png" id="jupiterPuzzle">
+            </button>
+            <button id="buttonPosition6">
                 <img class="position6" src="../images/interactions/room1/Solar System Puzzle/Saturn.png" id="saturnPuzzle">
+            </button>
+            <button id="buttonPosition7">
                 <img class="position7" src="../images/interactions/room1/Solar System Puzzle/Uranus.png" id="uranusPuzzle">
+            </button>
+            <button id="buttonPosition8">
                 <img class="position8" src="../images/interactions/room1/Solar System Puzzle/Neptune.png" id="neptunePuzzle">
+            </button>
           </div>
         </div>
 

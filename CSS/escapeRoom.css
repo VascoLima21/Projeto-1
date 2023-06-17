@@ -1,3 +1,24 @@
+.firstRoomBg {
+    background-image: url("../images/backgrounds/FirstRoomBg.png");
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1500px;
+    height: 800px;
+}
+
+#solarSystemRoomBg {
+    background-image: url("../images/backgrounds/solarSystemRoomBg.png");
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1500px;
+    height: 800px;
+}
+
+
 #heading {
     display: flex;
     justify-content: space-around;
@@ -24,6 +45,10 @@ button {
     align-self: center;
 }
 
+#inventoryBar {
+    align-self: flex-end;
+}
+
 #progressBar {
     position: relative;
     display: flex;
@@ -45,6 +70,11 @@ button {
 
 #rocketDiv {
     align-self: center;
+}
+
+#rocketPoster {
+    width: 150px;
+    height: auto;
 }
 
 #rocketDecoration {
@@ -81,23 +111,32 @@ button {
     justify-content: center;
 }
 
-#escapeRoomBg {
-    background-color: #EAEAEA;
-    width: 1500px;
-    height: 600px;
-}
-
 #solarSystemPuzzle {
     width: 400px;
 }
 
 #screenPassword {
-    background: #FFFFFF;
-    border: 2.68327px solid #04082B;
+    width: 700px;
+    height: auto;
 }
 
 #monitorChallenges {
     border: 2px solid black;
+}
+
+#warningMonitor {
+    width: 200px;
+    height: auto;
+}
+
+#monitorLeft {
+    width: 150px;
+    height: auto;
+}
+
+#monitorRight {
+    width: 150px;
+    height: auto;
 }
 
 .modal-dialog-centered .modal-content {
@@ -106,50 +145,88 @@ button {
     align-items: center;
 }
 
-#solarSystemPuzzleBg{
-    background-image: url("../images/interactions/room1/Solar System Puzzle/solarSystemPuzzleBg2.png");
+#solarSystemPuzzleBg {
+    background-image: url("../images/interactions/room1/Solar System Puzzle/solarSystemPuzzleBg.png");
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
 }
 
-.position1{
-    height:50%;
+#btnSubmitSolarSystemPuzzle{
+    background-color: orange;
+    height: 3vh;
+    color: white;
+}
+
+.position1 {
+    height: 300px;
     width: auto;
 }
 
-.position2{
-    height:50%;
+.position2 {
+    height: 300px;
     width: auto;
 }
 
-.position4{
-    height:50%;
+.position4 {
+    height: 300px;
     width: auto;
 }
 
-.position6{
-    height:50%;
+.position6 {
+    height: 300px;
     width: auto;
 }
 
-.position3{
-    height:50%;
+.position3 {
+    height: 300px;
     width: auto;
 }
 
-.position7{
-    height:50%;
+.position7 {
+    height: 300px;
     width: auto;
 }
 
-.position8{
-    height:50%;
+.position8 {
+    height: 300px;
     width: auto;
 }
 
-.position5{
-    height:50%;
+.position5 {
+    height: 300px;
     width: auto;
+}
+
+.imageContainer {
+    position: relative;
+    display: inline-block;
+}
+
+#doorShipEdit {
+    width: 250px;
+    height: auto;
+}
+
+#lockerEdit {
+    width: 150px;
+    height: auto;
+}
+
+#solarSystemPuzzleBg div {
+    margin-right: 20px;
+}
+
+.droppable {
+    border: 2px dashed #aaa;
+    padding: 10px;
+    width: 120px;
+    height: 120px;
+}
+
+.droppable img {
+    width: 100%;
+    height: 100%;
 }

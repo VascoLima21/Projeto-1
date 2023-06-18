@@ -500,21 +500,21 @@ function showChallengeMonitor(currentChallenge) {
           <td>During a Trip to Space, Every Part of the Rocket Ship Remains Intact.</td>
           <td class="trueOrFalse"></td>
           <td class="trueOrFalse"></td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
           <td>The First Person to Travel to Space was Neil Armstrong</td>
           <td class="trueOrFalse"></td>
           <td class="trueOrFalse"></td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
           <td>Saturn Isn't the Only Planet With Rings in The Solar System</td>
           <td class="trueOrFalse"></td>
           <td class="trueOrFalse"></td>
-          </tr>
-          </table>
-          <button id="rightArrowChallengeMonitor">
-          <img src="../images/interactions/arrowRight.svg">
-          </button>`;
+        </tr>
+      </table>
+      <button id="rightArrowChallengeMonitor">
+      <img src="../images/interactions/arrowRight.svg">
+      </button>`;
 
     //Adds and Event Listener to the Button to Enable Interactions with It
 
@@ -524,47 +524,211 @@ function showChallengeMonitor(currentChallenge) {
       nextChallengeButton.removeEventListener("click", handleNextChallengeButton);
       nextChallengeButton.addEventListener("click", handleNextChallengeButton);
     }
+
   } else if (currentChallenge === 2) {
     monitorChallenge.innerHTML = `
-    <button id="leftArrowChallengeMonitor">
-      <img src="../images/interactions/arrowLeft.svg">
-    </button>`;
+      <button id="leftArrowChallengeMonitor">
+        <img src="../images/interactions/arrowLeft.svg">
+      </button>
+      <table id="tableMultipleChoice1" class="table table-bordered speedy">
+        <tr>
+          <td colspan="2" class="text-center speedy">What is the Name of the Force which Keeps the Planets in Orbit around
+            the Sun?</td>
+        </tr>
+        <tr>
+          <td class="correctAnswer text-center">Gravity</td>
+          <td class="wrongAnswer text-center">Tension</td>
+        </tr>
+        <tr>
+          <td class="wrongAnswer text-center">Orbital Force</td>
+          <td class="wrongAnswer text-center">Magnetic Force</td>
+        </tr>
+      </table>
+      <button disabled="true" id="rightArrowChallengeMonitor">
+        <img src="../images/interactions/arrowRight.svg">
+      </button>
+    `;
 
-    const previousChallengeButton = document.getElementById("leftArrowChallengeMonitor");
+    const nextQuestionButton = document.getElementById("rightArrowChallengeMonitor");
 
-    if (previousChallengeButton) {
-      previousChallengeButton.removeEventListener("click", handlePreviousChallengeButton);
-      previousChallengeButton.addEventListener("click", handlePreviousChallengeButton);
+    if (nextQuestionButton) {
+      nextQuestionButton.removeEventListener("click", handleNextQuestionButton);
+      nextQuestionButton.addEventListener("click", handleNextQuestionButton);
+    }
+
+    //Does the Verification for the Multiple Choice Puzzle
+
+    const tableMultipleChoice = document.getElementById("tableMultipleChoice1")
+
+    var answerCells = tableMultipleChoice.querySelectorAll('td');
+
+    answerCells.forEach(function (cell) {
+      cell.addEventListener('click', function () {
+        // Remove a classe "selected" de todas as células
+        answerCells.forEach(function (cell) {
+          cell.classList.remove('selected');
+        });
+
+        // Adiciona a classe "selected" à célula clicada
+        cell.classList.add('selected');
+
+        // Verifica se a célula clicada possui a classe "correctAnswer"
+        if (cell.classList.contains('correctAnswer')) {
+          // Habilita o botão de avançar e preenche o background da célula com verde
+          document.getElementById('rightArrowChallengeMonitor').removeAttribute('disabled');
+          cell.style.backgroundColor = 'green';
+        }
+      });
+    });
+
+  } else if (currentChallenge === 2.5) {
+    monitorChallenge.innerHTML = `
+      <button id="leftArrowChallengeMonitor">
+        <img src="../images/interactions/arrowLeft.svg">
+      </button>
+      <table id="tableMultipleChoice2" class="table table-bordered speedy">
+        <tr>
+          <td colspan="2" class="text-center">What would you find if you travelled to the center of the solar system?
+          </td>
+        </tr>
+        <tr>
+          <td class="wrongAnswer text-center">Earth</td>
+          <td class="wrongAnswer text-center">A Black Hole</td>
+        </tr>
+        <tr>
+          <td class="correctAnswer text-center">The Sun</td>
+          <td class="wrongAnswer text-center">Saturn</td>
+        </tr>
+      </table>
+      <button id="rightArrowChallengeMonitor">
+        <img src="../images/interactions/arrowRight.svg">
+      </button>
+    `;
+
+    const tableMultipleChoice2 = document.getElementById("tableMultipleChoice2")
+
+    var answerCells = tableMultipleChoice2.querySelectorAll('td');
+
+    answerCells.forEach(function (cell) {
+      cell.addEventListener('click', function () {
+        // Remove a classe "selected" de todas as células
+        answerCells.forEach(function (cell) {
+          cell.classList.remove('selected');
+        });
+
+        // Adiciona a classe "selected" à célula clicada
+        cell.classList.add('selected');
+
+        // Verifica se a célula clicada possui a classe "correctAnswer"
+        if (cell.classList.contains('correctAnswer')) {
+          // Habilita o botão de avançar e preenche o background da célula com verde
+          document.getElementById('rightArrowChallengeMonitor').removeAttribute('disabled');
+          cell.style.backgroundColor = 'green';
+        } else {
+          // Desabilita o botão de avançar e remove qualquer cor de background da célula
+          document.getElementById('rightArrowChallengeMonitor').setAttribute('disabled', 'disabled');
+          cell.style.backgroundColor = '';
+        }
+      });
+    });
+
+    const nextQuestionButton = document.getElementById("rightArrowChallengeMonitor");
+
+    if (nextQuestionButton) {
+      nextQuestionButton.removeEventListener("click", handleNextQuestionButton);
+      nextQuestionButton.addEventListener("click", handleNextQuestionButton);
+    }
+
+  } else if (currentChallenge === 3) {
+    monitorChallenge.innerHTML = `
+      <button id="leftArrowChallengeMonitor">
+        <img src="../images/interactions/arrowLeft.svg">
+      </button>
+      <table id="tableMultipleChoice3" class="table table-bordered speedy">
+        <tr>
+          <td colspan="2" class="text-center">What Shape is the Milky Way?</td>
+        </tr>
+        <tr>
+          <td class="wrongAnswer text-center">Circular</td>
+          <td class="correctAnswer text-center">Spiral</td>
+        </tr>
+        <tr>
+          <td class="wrongAnswer text-center">Elliptical</td>
+          <td class="wrongAnswer text-center">Irregular</td>
+        </tr>
+      </table>
+    `;
+    const tableMultipleChoice3 = document.getElementById("tableMultipleChoice3")
+
+    var answerCells = tableMultipleChoice3.querySelectorAll('td');
+
+    answerCells.forEach(function (cell) {
+      cell.addEventListener('click', function () {
+        // Remove a classe "selected" de todas as células
+        answerCells.forEach(function (cell) {
+          cell.classList.remove('selected');
+        });
+
+        // Adiciona a classe "selected" à célula clicada
+        cell.classList.add('selected');
+
+        // Verifica se a célula clicada possui a classe "correctAnswer"
+        if (cell.classList.contains('correctAnswer')) {
+          // Habilita o botão de avançar e preenche o background da célula com verde
+          cell.style.backgroundColor = 'green';
+        } else {
+          // Desabilita o botão de avançar e remove qualquer cor de background da célula
+          cell.style.backgroundColor = '';
+        }
+      });
+    });
+    const nextQuestionButton = document.getElementById("rightArrowChallengeMonitor");
+
+    if (nextQuestionButton) {
+      nextQuestionButton.removeEventListener("click", handleNextQuestionButton);
+      nextQuestionButton.addEventListener("click", handleNextQuestionButton);
     }
 
   }
 
-  // Obtém todos os elementos <td> com a classe "trueOrFalse"
+  const previousChallengeButton = document.getElementById("leftArrowChallengeMonitor");
+
+  if (previousChallengeButton) {
+    previousChallengeButton.removeEventListener("click", handlePreviousChallengeButton);
+    previousChallengeButton.addEventListener("click", handlePreviousChallengeButton);
+  }
+
+  // Gets all the td elements with the class "trueOrFalse"
   var cells = document.getElementsByClassName("trueOrFalse");
 
-  // Percorre todos os elementos <td> e adiciona um ouvinte de evento de clique a cada um
+  // Goes through all the td elements and adds an event listener to each of them
   for (var i = 0; i < cells.length; i++) {
     cells[i].addEventListener("click", function () {
-      // Percorre todas as células da mesma linha
+      // Goes through the cells in the same row
       var rowCells = this.parentNode.children;
       for (var j = 1; j < rowCells.length; j++) {
-        // Remove o "X" das células da mesma linha
+        // Removes the "X" from the cells after the question cells
         rowCells[j].innerText = "";
       }
 
-      // Define o conteúdo de texto da célula atual como "X"
+      // Defines the Content of the Current Cell as "X"
       this.innerText = "X";
 
-      // Verifica as respostas do usuário e desbloqueia o botão de avançar para a direita
+      // Verifies the User's answers
       checkAnswers();
     });
   }
+
 }
+
+
+
+//Function That Shows the Table of The Multiple Choice Question That is Currently Displaying
 
 let currentChallengeMonitor = 1;
 showRoom(currentRoom);
 
-// Event listener para abrir a modal do monitorChallenge
+// Event Listener for opening the monitorChallenge modal
 const leftMonitorInteraction = document.getElementById("leftMonitorInteraction");
 
 leftMonitorInteraction.addEventListener("click", function () {
@@ -599,6 +763,29 @@ function handlePreviousChallengeButton() {
   showChallengeMonitor(currentChallengeMonitor);
 }
 
+//Handles the Next and Previous Question Button
+
+function nextQuestion(currentChallenge) {
+  currentChallenge += 0.5;
+  return currentChallenge;
+}
+
+function previousQuestion(currentChallenge) {
+  currentChallenge -= 0.5;
+  return currentChallenge;
+}
+
+function handleNextQuestionButton() {
+  currentChallengeMonitor = nextQuestion(currentChallengeMonitor)
+  showChallengeMonitor(currentChallengeMonitor)
+}
+
+function handlePreviousQuestionButton() {
+  currentChallengeMonitor = previousQuestion(currentChallengeMonitor)
+  showChallengeMonitor(currentChallengeMonitor)
+}
+
+
 //Checks if the User has Gotten the Answers Right
 
 function checkAnswers() {
@@ -607,12 +794,12 @@ function checkAnswers() {
   var correctAnswers = ["False", "False", "True"];
   var userAnswers = [];
 
-  // Percorre cada linha da tabela, começando da segunda linha (índice 1)
+  // Goes through each row of the table, starting from the second line
   for (var i = 1; i < rows.length; i++) {
     var cells = rows[i].getElementsByTagName("td");
     var answer = "";
 
-    // Verifica em qual célula a resposta do usuário está (Verdadeiro ou Falso)
+    // Verifies in which cell the user's answer is (to see if it's True or False)
     if (cells[1].innerText === "X") {
       answer = "True";
     } else if (cells[2].innerText === "X") {
@@ -622,7 +809,7 @@ function checkAnswers() {
     userAnswers.push(answer);
   }
 
-  // Verifica se as respostas do usuário estão corretas
+  // Verifies if the user's answers are correct 
   var isCorrect = true;
   for (var i = 0; i < correctAnswers.length; i++) {
     if (correctAnswers[i] !== userAnswers[i]) {
@@ -631,7 +818,7 @@ function checkAnswers() {
     }
   }
 
-  // Desbloqueia o botão de avançar para a direita se as respostas estiverem corretas
+  // Unlocks the Button to Go to the Next Challenge in the Center Room's Left Monitor
   var rightArrowButton = document.getElementById("rightArrowChallengeMonitor");
   if (isCorrect) {
     rightArrowButton.disabled = false;

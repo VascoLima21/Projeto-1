@@ -34,9 +34,9 @@
     </div>
   </div>
 
+  <button data-bs-toggle="modal" data-bs-target="#secondCodeModal"></button>
   <!-- <button data-bs-toggle="modal" data-bs-target="#logInModal"></button>
-  <button data-bs-toggle="modal" data-bs-target="#logInModal"></button>
-  <button data-bs-toggle="modal" data-bs-target="#logInModal"></button> -->
+  <button data-bs-toggle="modal" data-bs-target="#logInModal"></button>  -->
 
   <div class="modal" id="firstCodeModal">
     <div class="modal-dialog">
@@ -50,6 +50,26 @@
 
         <div class="modal-body">
           <p class="speedy text-center" id="firstCode"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="secondCodeModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- First Half of the 8 Digit Code Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">First Half of the 8 Digit Code</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <!--First Half of the 8 Digit Code -->
+
+        <div class="modal-body">
+          <p class="speedy text-center" id="firstHalf"></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

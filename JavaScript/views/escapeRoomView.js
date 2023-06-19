@@ -106,9 +106,6 @@ function showRoom(currentRoom) {
         <button id="leftArrowMain">
           <img src="../images/interactions/arrowLeft.svg">
         </button>
-        <button id="rocketPosterButton">
-          <img id="rocketPoster" src="../images/interactions/room1/rocketPoster.svg">
-        </button>
         <button id="leftMonitorInteraction" data-bs-toggle="modal"
         data-bs-target="#zoomMonitorLeftModal">
           <img id="monitorLeft" src="../images/interactions/room1/monitorLeft.png">
@@ -225,12 +222,18 @@ function showRoom(currentRoom) {
       `;
 
     const btnLocker = document.getElementById("locker");
+    firstHalfText= document.getElementById("firstHalf")
 
     btnLocker.addEventListener("click", function () {
       if (!solarSystemStatus) {
         alert("Complete the Solar System Puzzle to Have Acess to the Locker")
       } else {
         secondPuzzleCode = generate4DigCode()
+        
+        inventorySlot3 = `<button data-bs-toggle="modal" data-bs-target="#secondCodeModal"><img src='../images/inventory/firstHalf.png'></button>`
+        const inventorySlot3Tag = document.getElementById("slot3");
+        firstHalfText.innerText = secondPuzzleCode
+        inventorySlot3Tag.innerHTML = inventorySlot3;
         alert("You've Unlocked the Locker and the First Half of the Final Code!")
       }
     })
@@ -321,7 +324,7 @@ function showRoom(currentRoom) {
     mercuryInput.style = "width: 40px"
 
     let mercuryImg = document.createElement("img");
-    mercuryImg.className= "planetSize";
+    mercuryImg.className = "planetSize";
     mercuryImg.src = "../images/interactions/room1/Solar System Puzzle/Mercury.png"
 
     shuffledDivs[0].append(mercuryImg);
@@ -340,7 +343,7 @@ function showRoom(currentRoom) {
     venusInput.style = "width: 40px"
 
     let venusImg = document.createElement("img");
-    venusImg.className= "planetSize";
+    venusImg.className = "planetSize";
     venusImg.src = "../images/interactions/room1/Solar System Puzzle/Venus.png"
 
     shuffledDivs[1].append(venusImg);
@@ -358,7 +361,7 @@ function showRoom(currentRoom) {
     earthInput.style = "width: 40px"
 
     let earthImg = document.createElement("img");
-    earthImg.className="planetSize";
+    earthImg.className = "planetSize";
     earthImg.src = "../images/interactions/room1/Solar System Puzzle/Earth.png"
 
     shuffledDivs[2].append(earthImg);
@@ -376,7 +379,7 @@ function showRoom(currentRoom) {
     marsInput.style = "width: 40px"
 
     let marsImg = document.createElement("img");
-    marsImg.className="planetSize"
+    marsImg.className = "planetSize"
     marsImg.src = "../images/interactions/room1/Solar System Puzzle/Mars.png"
 
     shuffledDivs[3].append(marsImg);
@@ -395,7 +398,7 @@ function showRoom(currentRoom) {
     jupiterInput.style = "width: 40px"
 
     let jupiterImg = document.createElement("img");
-    jupiterImg.className= "planetSize";
+    jupiterImg.className = "planetSize";
     jupiterImg.src = "../images/interactions/room1/Solar System Puzzle/Jupiter.png"
 
     shuffledDivs[4].append(jupiterImg);
@@ -413,7 +416,7 @@ function showRoom(currentRoom) {
     saturnInput.style = "width: 40px"
 
     let saturnImg = document.createElement("img");
-    saturnImg.className= "planetSize";
+    saturnImg.className = "planetSize";
     saturnImg.src = "../images/interactions/room1/Solar System Puzzle/Saturn.png"
 
     shuffledDivs[5].append(saturnImg);
@@ -431,7 +434,7 @@ function showRoom(currentRoom) {
     uranusInputCorrectAnswer = 7;
 
     let uranusImg = document.createElement("img");
-    uranusImg.className= "planetSize";
+    uranusImg.className = "planetSize";
     uranusImg.src = "../images/interactions/room1/Solar System Puzzle/Uranus.png"
 
     shuffledDivs[6].append(uranusImg);
@@ -449,7 +452,7 @@ function showRoom(currentRoom) {
     neptuneInput.style = "width: 40px"
 
     let neptuneImg = document.createElement("img");
-    neptuneImg.className= "planetSize";
+    neptuneImg.className = "planetSize";
     neptuneImg.src = "../images/interactions/room1/Solar System Puzzle/Neptune.png"
 
     shuffledDivs[7].append(neptuneImg);

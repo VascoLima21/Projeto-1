@@ -78,8 +78,7 @@ h1 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
-    background-size: 100% 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }

@@ -33,11 +33,11 @@ const intervalId = setInterval(updateTimer, 1000);
 
 //Sucess Sound Const
 
-const sucessSound= new Audio("../sounds/sucessSound.mp3")
+const sucessSound = new Audio("../sounds/sucessSound.mp3")
 
 //Fail Sound Const
 
-const failSound= new Audio("../sounds/failSound.mp3")
+const failSound = new Audio("../sounds/failSound.mp3")
 
 //Desafios
 
@@ -68,7 +68,16 @@ function updateProgressBar() {
   challengesCompElement.textContent = `${curChallengesComp}/${totalChallenges}`;
 }
 
+let firstPuzzleCode
+
 let currentRoom = 1;
+
+let userAnswers=[];
+
+let inventorySlot1= "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
+let inventorySlot2= "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
+let inventorySlot3= "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
+let inventorySlot4= "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
 
 // Function to Show The Rooms
 function showRoom(currentRoom) {
@@ -107,10 +116,10 @@ function showRoom(currentRoom) {
           <table id="inventoryBarTable">
             <tr style='background-color: #3B3B3B;'>
               <td id='invBarLeftArrow'><img src='../images/interactions/Inventory Bar/invBarLeftArrow.svg'></td> 
-              <td id='slot1'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
-              <td id='slot2'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
-              <td id='slot3'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
-              <td id='slot4'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
+              <td id='slot1'>${inventorySlot1}</td> 
+              <td id='slot2'>${inventorySlot2}</td> 
+              <td id='slot3'>${inventorySlot3}</td> 
+              <td id='slot4'>${inventorySlot4}</td> 
               <td id='invBarRightArrow'><img src='../images/interactions/Inventory Bar/invBarRightArrow.svg'></td> 
             </tr> 
           </table> 
@@ -144,6 +153,7 @@ function showRoom(currentRoom) {
         </div>
       </div>
       `;
+
     // Event Listener for opening the monitorChallenge modal
     const leftMonitorInteraction = document.getElementById("leftMonitorInteraction");
 
@@ -158,10 +168,10 @@ function showRoom(currentRoom) {
         <table>
           <tr style='background-color: #3B3B3B;'>
             <td id='invBarLeftArrow'><img src='../images/interactions/Inventory Bar/invBarLeftArrow.svg'></td> 
-            <td id='slot1'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
-            <td id='slot2'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
-            <td id='slot3'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
-            <td id='slot4'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
+            <td id='slot1'>${inventorySlot1}</td> 
+            <td id='slot2'>${inventorySlot2}</td> 
+            <td id='slot3'>${inventorySlot3}</td> 
+            <td id='slot4'>${inventorySlot4}</td> 
             <td id='invBarRightArrow'><img src='../images/interactions/Inventory Bar/invBarRightArrow.svg'></td> 
           </tr> 
         </table> 
@@ -217,10 +227,10 @@ function showRoom(currentRoom) {
           <table>
           <tr style='background-color: #3B3B3B;'>
           <td id='invBarLeftArrow'><img src='../images/interactions/Inventory Bar/invBarLeftArrow.svg'></td> 
-          <td id='slot1'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
-          <td id='slot2'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
-          <td id='slot3'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
-          <td id='slot4'><img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'></td> 
+          <td id='slot1'>${inventorySlot1}</td> 
+          <td id='slot2'>${inventorySlot2}</td> 
+          <td id='slot3'>${inventorySlot3}</td> 
+          <td id='slot4'>${inventorySlot4}</td> 
           <td id='invBarRightArrow'><img src='../images/interactions/Inventory Bar/invBarRightArrow.svg'></td> 
           </tr> 
           </table> 
@@ -397,19 +407,22 @@ function showRoom(currentRoom) {
   }
 
   const rightArrowMain = document.getElementById("rightArrowMain");
+  const leftArrowMain = document.getElementById("leftArrowMain");
+
   if (rightArrowMain) {
     rightArrowMain.removeEventListener("click", handleRightArrowClick);
     rightArrowMain.addEventListener("click", handleRightArrowClick);
   }
 
-  const leftArrowMain = document.getElementById("leftArrowMain");
   if (leftArrowMain) {
     leftArrowMain.removeEventListener("click", handleLeftArrowClick);
     leftArrowMain.addEventListener("click", handleLeftArrowClick);
   }
 }
 
-let solarSystemStatus
+let firstPuzzleStatus = false;
+let solarSystemStatus;
+let room1LastPuzzleStatus = false;
 
 function verifySolarSystemPuzzle() {
 
@@ -428,7 +441,6 @@ function verifySolarSystemPuzzle() {
 
     // Verifique se o valor inserido é diferente da ordem correta
     if (inputValue !== correctOrder[i]) {
-      failSound.play()
       allCorrect = false; // Pelo menos uma resposta está incorreta
       break; // Pode parar o loop, já que encontrou uma resposta incorreta
     }
@@ -442,19 +454,31 @@ function verifySolarSystemPuzzle() {
     curChallengesComp += 1;
     updateProgressBar()
   } else {
-    // Pelo menos uma resposta está incorreta
-    // Faça algo, como exibir uma mensagem de erro ou destacar as respostas incorretas
+    failSound.play()
+    alert("Incorrect. Try Again!")
   }
 }
 
 function handleLeftArrowClick() {
-  currentRoom = moveLeft(currentRoom);
-  showRoom(currentRoom);
+
+  if (firstPuzzleStatus === false) {
+    alert("You Should Unlock the 4 Digit Code for the Main Monitor First");
+
+  } else {
+    currentRoom = moveLeft(currentRoom);
+    showRoom(currentRoom);
+  }
 }
 
 function handleRightArrowClick() {
-  currentRoom = moveRight(currentRoom);
-  showRoom(currentRoom);
+  if (firstPuzzleStatus === false) {
+    alert("You Should Unlock the 4 Digit Code for the Main Monitor First");
+
+  } else {
+    currentRoom = moveRight(currentRoom);
+    showRoom(currentRoom);
+  }
+
 }
 
 function moveLeft(currentRoom) {
@@ -479,18 +503,18 @@ function showChallengeMonitor(currentChallenge) {
         </tr>
         <tr>
           <td>During a Trip to Space, Every Part of the Rocket Ship Remains Intact.</td>
-          <td class="trueOrFalse"></td>
-          <td class="trueOrFalse"></td>
+          <td class="trueOrFalse">`+(userAnswers[0] =='True' ? "X" : "")+`</td>
+          <td class="trueOrFalse">`+(userAnswers[0] =='False' ? "X" : "")+`</td>
         </tr>
         <tr>
           <td>The First Person to Travel to Space was Neil Armstrong</td>
-          <td class="trueOrFalse"></td>
-          <td class="trueOrFalse"></td>
+          <td class="trueOrFalse">`+(userAnswers[1] =='True' ? "X" : "")+`</td>
+          <td class="trueOrFalse">`+(userAnswers[1] =='False' ? "X" : "")+`</td>
         </tr>
         <tr>
           <td>Saturn Isn't the Only Planet With Rings in The Solar System</td>
-          <td class="trueOrFalse"></td>
-          <td class="trueOrFalse"></td>
+          <td class="trueOrFalse">`+(userAnswers[2] =='True' ? "X" : "")+`</td>
+          <td class="trueOrFalse">`+(userAnswers[2] =='False' ? "X" : "")+`</td>
         </tr>
       </table>
       <button disabled="true" id="rightArrowChallengeMonitor">
@@ -504,6 +528,13 @@ function showChallengeMonitor(currentChallenge) {
     if (nextChallengeButton) {
       nextChallengeButton.removeEventListener("click", handleNextChallengeButton);
       nextChallengeButton.addEventListener("click", handleNextChallengeButton);
+    }
+
+    var rightArrowButton = document.getElementById("rightArrowChallengeMonitor");
+
+    // Unlocks the Button to Go to the Next Challenge in the Center Room's Left Monitor
+    if (solarSystemStatus) {
+      rightArrowButton.disabled = false;
     }
 
   } else if (currentChallenge === 2) {
@@ -560,7 +591,7 @@ function showChallengeMonitor(currentChallenge) {
           progress += 10;
           sucessSound.play();
           updateProgressBar()
-        }else{
+        } else {
           failSound.play()
         }
       });
@@ -695,24 +726,38 @@ function showChallengeMonitor(currentChallenge) {
   // Gets all the td elements with the class "trueOrFalse"
   var cells = document.getElementsByClassName("trueOrFalse");
 
+
+
   // Goes through all the td elements and adds an event listener to each of them
   for (var i = 0; i < cells.length; i++) {
+
     cells[i].addEventListener("click", function () {
-      // Goes through the cells in the same row
-      var rowCells = this.parentNode.children;
-      for (var j = 1; j < rowCells.length; j++) {
-        // Removes the "X" from the cells after the question cells
-        rowCells[j].innerText = "";
+      if (!firstPuzzleStatus) {
+        // Goes through the cells in the same row
+        var rowCells = this.parentNode.children;
+        for (var j = 1; j < rowCells.length; j++) {
+          // Removes the "X" from the cells after the question cells
+          rowCells[j].innerText = "";
+        }
+
+        // Defines the Content of the Current Cell as "X"
+        this.innerText = "X";
+
+        // Verifies the User's answers
+        checkAnswers();
       }
-
-      // Defines the Content of the Current Cell as "X"
-      this.innerText = "X";
-
-      // Verifies the User's answers
-      checkAnswers();
     });
   }
+}
 
+//Function That Generates a Random 4 Digit Code
+
+function generate4DigCode() {
+  let code=""
+  for (var i = 0; i < 4; i++) {
+    code += Math.floor(Math.random() * 10);
+  }
+  return code;
 }
 
 //Function That Shows the Table of The Multiple Choice Question That is Currently Displaying
@@ -777,15 +822,13 @@ function handlePreviousQuestionButton() {
   showChallengeMonitor(currentChallengeMonitor)
 }
 
-
 //Checks if the User has Gotten the Answers Right
 
 function checkAnswers() {
   var table = document.getElementById("trueOrFalseTable");
   var rows = table.getElementsByTagName("tr");
   var correctAnswers = ["False", "False", "True"];
-  var userAnswers = [];
-
+  userAnswers = [];
   // Goes through each row of the table, starting from the second line
   for (var i = 1; i < rows.length; i++) {
     var cells = rows[i].getElementsByTagName("td");
@@ -810,13 +853,30 @@ function checkAnswers() {
     }
   }
 
-  // Unlocks the Button to Go to the Next Challenge in the Center Room's Left Monitor
-  var rightArrowButton = document.getElementById("rightArrowChallengeMonitor");
-  if (isCorrect && solarSystemStatus) {
-    progress += 30;
-    curChallengesComp+= 1;
+  //Handles the Funtionalities for Completing the Puzzle(Adds the Progress to the Progress Bar, Adds the Completion of the Challenge to the CompletedC Challenges Text and Plays the Sucess Sound)
+
+  if (isCorrect && firstPuzzleStatus != true) {
+    const firstCodeText= document.getElementById("firstCode");
+    firstPuzzleCode= generate4DigCode()
+    firstCodeText.innerText= firstPuzzleCode
+    firstPuzzleStatus = true;
     sucessSound.play();
-    updateProgressBar()
-    rightArrowButton.disabled = false;
+    progress += 30;
+    curChallengesComp += 1;
+    updateProgressBar();
+
+    // Uses the Promise to Wait For All the Actions to be Completed before Showing the Alert
+    Promise.resolve()
+      .then(function () {
+        return new Promise(function (resolve) {
+          // Sets a One Second Timeout Before Showing the Alert
+          setTimeout(resolve, 1000);
+        });
+      })
+      .then(function () {
+        // Shows the Alert
+        alert("Congrats on Solving Your First Puzzle! You Have Unlocked the 4 Digit Code to Access the Main Monitor!");
+        inventorySlot1= `<button data-bs-toggle="modal" data-bs-target="#firstCodeModal"><img src='../images/inventory/firstPuzzleCode.png'></button>`
+      });
   }
 }

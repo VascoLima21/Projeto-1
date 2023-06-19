@@ -4,8 +4,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 1500px;
-    height: 800px;
+    width: 60vw;
+    height: 60vh;
 }
 
 #solarSystemRoomBg {
@@ -14,8 +14,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 1500px;
-    height: 800px;
+    width: 60vw;
+    height: 60vh;
 }
 
 
@@ -40,8 +40,8 @@ button {
 }
 
 #logoEscapeRoom {
-    width: 220px;
-    height: 220px;
+    width: 10vw;
+    height: auto;
     align-self: center;
 }
 
@@ -56,13 +56,13 @@ button {
     align-self: center;
     background: #FFFFFF;
     border-radius: 10px;
-    height: 5vh;
-    width: 60vw;
+    height: 4vh;
+    width: 50vw;
 }
 
 #barFill {
     position: absolute;
-    height: 5vh;
+    height: 4vh;
     border-radius: 10px;
     background: #F50623;
     transition: width 0.3s ease-in-out;
@@ -116,7 +116,7 @@ button {
 }
 
 #screenPassword {
-    width: 700px;
+    width: 25vw;
     height: auto;
 }
 
@@ -151,7 +151,6 @@ button {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    display: flex;
 }
 
 #btnSubmitSolarSystemPuzzle{
@@ -160,44 +159,9 @@ button {
     color: white;
 }
 
-.position1 {
-    height: 300px;
-    width: auto;
-}
-
-.position2 {
-    height: 300px;
-    width: auto;
-}
-
-.position4 {
-    height: 300px;
-    width: auto;
-}
-
-.position6 {
-    height: 300px;
-    width: auto;
-}
-
-.position3 {
-    height: 300px;
-    width: auto;
-}
-
-.position7 {
-    height: 300px;
-    width: auto;
-}
-
-.position8 {
-    height: 300px;
-    width: auto;
-}
-
-.position5 {
-    height: 300px;
-    width: auto;
+.planetSize{
+    width: 5vw;
+    height: auto;
 }
 
 .imageContainer {
@@ -229,4 +193,17 @@ button {
 .droppable img {
     width: 100%;
     height: 100%;
+}
+
+#screenPasswordSubmit{
+    background-color: orangered;
+    width: 5vw;
+    height: auto;
+    align-self: center;
+}
+
+#arrowAndPuzzleDiv{
+    width: 85%;
+    margin-left: 6%;
+    margin-top: 6%;
 }

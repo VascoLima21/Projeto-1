@@ -39,9 +39,9 @@ const sucessSound = new Audio("../sounds/sucessSound.mp3")
 
 const failSound = new Audio("../sounds/failSound.mp3")
 
-//Desafios
+//Challenges
 
-let curChallengesComp = 0; //Variável que Guarda e Atualiza os Desafios Completados
+let curChallengesComp = 0; //Variable that Stores and Updates the Current Completed Challenges
 
 const challengesCompleted = document.getElementById("challengesCompleted");
 
@@ -68,16 +68,32 @@ function updateProgressBar() {
   challengesCompElement.textContent = `${curChallengesComp}/${totalChallenges}`;
 }
 
+//Variable for the First 4 Digit Code you Get After Completing the First Puzzle
+
 let firstPuzzleCode
+
+//Variable for the Second 4 Digit Code you Get After Interacting With the Locker
+
+let secondPuzzleCode
+
+//Variable that Stores the Current Room you are at, Initialized at 1, which is the center room
 
 let currentRoom = 1;
 
-let userAnswers=[];
+//Stores the User's Answers for the First Puzzle (True or False)
 
-let inventorySlot1= "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
-let inventorySlot2= "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
-let inventorySlot3= "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
-let inventorySlot4= "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
+let userAnswers = [];
+
+//Variable for the Status of The Input of the Correct First 4 digit code
+
+let firstCodeStatus = false;
+
+//Variables for the Content of the Inventory Slots
+
+let inventorySlot1 = "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
+let inventorySlot2 = "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
+let inventorySlot3 = "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
+let inventorySlot4 = "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
 
 // Function to Show The Rooms
 function showRoom(currentRoom) {
@@ -105,10 +121,10 @@ function showRoom(currentRoom) {
         <div class="d-flex align-items-center justify-content-center image-container" id="screenPasswordDiv">
           <img  id="screenPassword" src="../images/interactions/room1/screenPassword.png">
           </div>
-          <div>
-            <input type="text" style="background: none; border: none; color: black;" class="speedy" placeholder="Insert 4 Digit Code Here: ">
+          <div class="d-flex flex-column flex-wrap align-content-center">
+            <input id="input4DigitCode" type="text" style="background: none; border: none; color: black;" class="speedy" placeholder="Insert 4 Digit Code Here: ">
+            <button class="btn" id="screenPasswordSubmit">Submit</button>
           </div>
-          <button id="screenPasswordSubmit">Submit</button>
         <button id="rightArrowMain">
           <img src="../images/interactions/arrowRight.svg">
         </button>
@@ -154,6 +170,19 @@ function showRoom(currentRoom) {
       </div>
       `;
 
+    //Event Listener For Submitting the 4 Digit Code
+
+    const btnSubmitCode = document.getElementById("screenPasswordSubmit");
+
+    btnSubmitCode.addEventListener("click", function () {
+      const userAnswerFirstCode = document.getElementById("input4DigitCode").value
+      if (userAnswerFirstCode == firstPuzzleCode) {
+        firstCodeStatus = true;
+        sucessSound.play()
+        alert("Correct!")
+      }
+    })
+
     // Event Listener for opening the monitorChallenge modal
     const leftMonitorInteraction = document.getElementById("leftMonitorInteraction");
 
@@ -194,15 +223,27 @@ function showRoom(currentRoom) {
       </div>
       
       `;
+
+    const btnLocker = document.getElementById("locker");
+
+    btnLocker.addEventListener("click", function () {
+      if (!solarSystemStatus) {
+        alert("Complete the Solar System Puzzle to Have Acess to the Locker")
+      } else {
+        secondPuzzleCode = generate4DigCode()
+        alert("You've Unlocked the Locker and the First Half of the Final Code!")
+      }
+    })
+
   } else if (currentRoom === 1.5) {
     escapeRoomDiv.innerHTML =
       `
       <div id="solarSystemRoomBg">
-        <div class="d-flex flex-row justify-content-center align-content-center">
+        <div id="arrowAndPuzzleDiv" class="d-flex flex-row justify-content-center align-content-center">
           <button id="leftArrowMain">
             <img src="../images/interactions/arrowLeft.svg">
           </button>
-            <div id="solarSystemPuzzleBg" class="d-flex">
+            <div id="solarSystemPuzzleBg" class="d-flex align-items-end">
               <div id="position1">
               </div>
               <div id="position2">
@@ -220,9 +261,10 @@ function showRoom(currentRoom) {
               <div id="position8">
               </div>
           </div>
-          <button class="btn"  id="btnSubmitSolarSystemPuzzle">Submit</button>
           </div>
-          
+          <div class="text-center">
+            <button class="btn"  id="btnSubmitSolarSystemPuzzle">Submit</button>
+          </div>
           <div id='inventoryBar'>
           <table>
           <tr style='background-color: #3B3B3B;'>
@@ -279,6 +321,7 @@ function showRoom(currentRoom) {
     mercuryInput.style = "width: 40px"
 
     let mercuryImg = document.createElement("img");
+    mercuryImg.className= "planetSize";
     mercuryImg.src = "../images/interactions/room1/Solar System Puzzle/Mercury.png"
 
     shuffledDivs[0].append(mercuryImg);
@@ -297,6 +340,7 @@ function showRoom(currentRoom) {
     venusInput.style = "width: 40px"
 
     let venusImg = document.createElement("img");
+    venusImg.className= "planetSize";
     venusImg.src = "../images/interactions/room1/Solar System Puzzle/Venus.png"
 
     shuffledDivs[1].append(venusImg);
@@ -314,6 +358,7 @@ function showRoom(currentRoom) {
     earthInput.style = "width: 40px"
 
     let earthImg = document.createElement("img");
+    earthImg.className="planetSize";
     earthImg.src = "../images/interactions/room1/Solar System Puzzle/Earth.png"
 
     shuffledDivs[2].append(earthImg);
@@ -331,6 +376,7 @@ function showRoom(currentRoom) {
     marsInput.style = "width: 40px"
 
     let marsImg = document.createElement("img");
+    marsImg.className="planetSize"
     marsImg.src = "../images/interactions/room1/Solar System Puzzle/Mars.png"
 
     shuffledDivs[3].append(marsImg);
@@ -349,6 +395,7 @@ function showRoom(currentRoom) {
     jupiterInput.style = "width: 40px"
 
     let jupiterImg = document.createElement("img");
+    jupiterImg.className= "planetSize";
     jupiterImg.src = "../images/interactions/room1/Solar System Puzzle/Jupiter.png"
 
     shuffledDivs[4].append(jupiterImg);
@@ -366,6 +413,7 @@ function showRoom(currentRoom) {
     saturnInput.style = "width: 40px"
 
     let saturnImg = document.createElement("img");
+    saturnImg.className= "planetSize";
     saturnImg.src = "../images/interactions/room1/Solar System Puzzle/Saturn.png"
 
     shuffledDivs[5].append(saturnImg);
@@ -383,6 +431,7 @@ function showRoom(currentRoom) {
     uranusInputCorrectAnswer = 7;
 
     let uranusImg = document.createElement("img");
+    uranusImg.className= "planetSize";
     uranusImg.src = "../images/interactions/room1/Solar System Puzzle/Uranus.png"
 
     shuffledDivs[6].append(uranusImg);
@@ -400,6 +449,7 @@ function showRoom(currentRoom) {
     neptuneInput.style = "width: 40px"
 
     let neptuneImg = document.createElement("img");
+    neptuneImg.className= "planetSize";
     neptuneImg.src = "../images/interactions/room1/Solar System Puzzle/Neptune.png"
 
     shuffledDivs[7].append(neptuneImg);
@@ -450,6 +500,9 @@ function verifySolarSystemPuzzle() {
   if (allCorrect) {
     sucessSound.play();
     solarSystemStatus = true;
+    inventorySlot2 = `<img src='../images/inventory/solarSystemKey.png'></img>`
+    const inventorySlot2Tag = document.getElementById("slot2");
+    inventorySlot2Tag.innerHTML = inventorySlot2;
     progress += 40;
     curChallengesComp += 1;
     updateProgressBar()
@@ -461,7 +514,7 @@ function verifySolarSystemPuzzle() {
 
 function handleLeftArrowClick() {
 
-  if (firstPuzzleStatus === false) {
+  if (!firstCodeStatus) {
     alert("You Should Unlock the 4 Digit Code for the Main Monitor First");
 
   } else {
@@ -471,7 +524,7 @@ function handleLeftArrowClick() {
 }
 
 function handleRightArrowClick() {
-  if (firstPuzzleStatus === false) {
+  if (!firstCodeStatus) {
     alert("You Should Unlock the 4 Digit Code for the Main Monitor First");
 
   } else {
@@ -503,18 +556,18 @@ function showChallengeMonitor(currentChallenge) {
         </tr>
         <tr>
           <td>During a Trip to Space, Every Part of the Rocket Ship Remains Intact.</td>
-          <td class="trueOrFalse">`+(userAnswers[0] =='True' ? "X" : "")+`</td>
-          <td class="trueOrFalse">`+(userAnswers[0] =='False' ? "X" : "")+`</td>
+          <td class="trueOrFalse">`+ (userAnswers[0] == 'True' ? "X" : "") + `</td>
+          <td class="trueOrFalse">`+ (userAnswers[0] == 'False' ? "X" : "") + `</td>
         </tr>
         <tr>
           <td>The First Person to Travel to Space was Neil Armstrong</td>
-          <td class="trueOrFalse">`+(userAnswers[1] =='True' ? "X" : "")+`</td>
-          <td class="trueOrFalse">`+(userAnswers[1] =='False' ? "X" : "")+`</td>
+          <td class="trueOrFalse">`+ (userAnswers[1] == 'True' ? "X" : "") + `</td>
+          <td class="trueOrFalse">`+ (userAnswers[1] == 'False' ? "X" : "") + `</td>
         </tr>
         <tr>
           <td>Saturn Isn't the Only Planet With Rings in The Solar System</td>
-          <td class="trueOrFalse">`+(userAnswers[2] =='True' ? "X" : "")+`</td>
-          <td class="trueOrFalse">`+(userAnswers[2] =='False' ? "X" : "")+`</td>
+          <td class="trueOrFalse">`+ (userAnswers[2] == 'True' ? "X" : "") + `</td>
+          <td class="trueOrFalse">`+ (userAnswers[2] == 'False' ? "X" : "") + `</td>
         </tr>
       </table>
       <button disabled="true" id="rightArrowChallengeMonitor">
@@ -732,6 +785,9 @@ function showChallengeMonitor(currentChallenge) {
   for (var i = 0; i < cells.length; i++) {
 
     cells[i].addEventListener("click", function () {
+
+      //Verifies if the first puzzle has been completed, and if it hasn't been completed it runs the code normally
+
       if (!firstPuzzleStatus) {
         // Goes through the cells in the same row
         var rowCells = this.parentNode.children;
@@ -753,7 +809,7 @@ function showChallengeMonitor(currentChallenge) {
 //Function That Generates a Random 4 Digit Code
 
 function generate4DigCode() {
-  let code=""
+  let code = ""
   for (var i = 0; i < 4; i++) {
     code += Math.floor(Math.random() * 10);
   }
@@ -856,9 +912,9 @@ function checkAnswers() {
   //Handles the Funtionalities for Completing the Puzzle(Adds the Progress to the Progress Bar, Adds the Completion of the Challenge to the CompletedC Challenges Text and Plays the Sucess Sound)
 
   if (isCorrect && firstPuzzleStatus != true) {
-    const firstCodeText= document.getElementById("firstCode");
-    firstPuzzleCode= generate4DigCode()
-    firstCodeText.innerText= firstPuzzleCode
+    const firstCodeText = document.getElementById("firstCode");
+    firstPuzzleCode = generate4DigCode()
+    firstCodeText.innerText = firstPuzzleCode
     firstPuzzleStatus = true;
     sucessSound.play();
     progress += 30;
@@ -876,7 +932,9 @@ function checkAnswers() {
       .then(function () {
         // Shows the Alert
         alert("Congrats on Solving Your First Puzzle! You Have Unlocked the 4 Digit Code to Access the Main Monitor!");
-        inventorySlot1= `<button data-bs-toggle="modal" data-bs-target="#firstCodeModal"><img src='../images/inventory/firstPuzzleCode.png'></button>`
+        inventorySlot1 = `<button data-bs-toggle="modal" data-bs-target="#firstCodeModal"><img src='../images/inventory/firstPuzzleCode.png'></button>`
+        const inventorySlot1Tag = document.getElementById("slot1");
+        inventorySlot1Tag.innerHTML = inventorySlot1;
       });
   }
 }

@@ -56,13 +56,13 @@ button {
     align-self: center;
     background: #FFFFFF;
     border-radius: 10px;
-    height: 40px;
-    width: 1000px;
+    height: 5vh;
+    width: 60vw;
 }
 
 #barFill {
     position: absolute;
-    height: 40px;
+    height: 5vh;
     border-radius: 10px;
     background: #F50623;
     transition: width 0.3s ease-in-out;

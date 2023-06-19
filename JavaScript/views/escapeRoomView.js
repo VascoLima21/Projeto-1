@@ -1,7 +1,5 @@
-//Tempo
-
-const totalTime = 1200; //Tempo Total em Segundos do Escape Room
-let totalChallenges = 3; //Quantidade de Desafios a Completar na Primeira Sala (Vai Mudar de Sala para Sala)
+const totalTime = 600; // Tempo Total em Segundos do Escape Room
+let totalChallenges = 3; // Quantidade de Desafios a Completar na Primeira Sala (Vai Mudar de Sala para Sala)
 let timeLeft = totalTime;
 const timer = document.getElementById("timer");
 let timeLeftElement = document.createElement("p");
@@ -16,10 +14,30 @@ timer.appendChild(timeLeftElement);
 function timeFormat(timeSecs) {
   const minutes = Math.floor(timeSecs / 60);
   const timeSecsLeft = timeSecs % 60;
-  return `${minutes.toString().padStart(2, "0")}:${timeSecsLeft
-    .toString()
-    .padStart(2, "0")}`;
+  return `${minutes.toString().padStart(2, "0")}:${timeSecsLeft.toString().padStart(2, "0")}`;
 }
+
+// Função para atualizar o temporizador a cada segundo
+function updateTimer() {
+  timeLeft--;
+  timeLeftElement.textContent = timeFormat(timeLeft);
+
+  if (timeLeft <= 0) {
+    clearInterval(intervalId); // Para a execução do setInterval quando o tempo acabar
+    // Tempo esgotado, mensagem de erro, etc...
+  }
+}
+
+// Inicia o temporizador
+const intervalId = setInterval(updateTimer, 1000);
+
+//Sucess Sound Const
+
+const sucessSound= new Audio("../sounds/sucessSound.mp3")
+
+//Fail Sound Const
+
+const failSound= new Audio("../sounds/failSound.mp3")
 
 //Desafios
 
@@ -37,31 +55,18 @@ challengesCompleted.appendChild(challengesCompElement);
 //Barra de Progresso
 
 // Largura da Barra de Progresso em Percentagem
-const progress = 20;
+let progress = 0;
 
 // Calcular a posição do foguetão e da Janelinha com o Progresso
 
 // const windowProgress= document.getElementById("windowProgress")
-const progressBar = document.getElementById("progressBar");
-const progressElement = document.getElementById("barFill");
 
-progressElement.style.width = progress + "%";
+function updateProgressBar() {
+  const progressElement = document.getElementById("barFill");
+  progressElement.style.width = progress + "%";
 
-// // Função para atualizar o timer
-// function timerUpdate() {
-//     const timer = document.getElementById("timer");
-//     timer.textContent = timeFormat(timeLeft);
-// }
-
-// setInterval(() => {
-//     timeLeft--;
-//     timerUpdate();
-
-//     if (timeLeft <= 0) {
-//         // Tempo esgotado, mensagem de erro etc...
-//     }
-// }, 1000);
-
+  challengesCompElement.textContent = `${curChallengesComp}/${totalChallenges}`;
+}
 
 let currentRoom = 1;
 
@@ -139,6 +144,12 @@ function showRoom(currentRoom) {
         </div>
       </div>
       `;
+    // Event Listener for opening the monitorChallenge modal
+    const leftMonitorInteraction = document.getElementById("leftMonitorInteraction");
+
+    leftMonitorInteraction.addEventListener("click", function () {
+      showChallengeMonitor(currentChallengeMonitor);
+    });
   } else if (currentRoom === 0.5) {
     escapeRoomDiv.innerHTML =
       `
@@ -219,7 +230,9 @@ function showRoom(currentRoom) {
     //Verifies if the Inputs are Correct
 
     const btnSubmit = document.getElementById('btnSubmitSolarSystemPuzzle');
-    btnSubmit.addEventListener('click', verifySolarSystemPuzzle);
+    btnSubmit.addEventListener('click', function () {
+      verifySolarSystemPuzzle(); // Calls The Function
+    });
 
     //Creation of the Planets with the Respective Images and Text Inputs
 
@@ -383,7 +396,6 @@ function showRoom(currentRoom) {
     shuffledDivs[7].append(neptuneInput)
   }
 
-
   const rightArrowMain = document.getElementById("rightArrowMain");
   if (rightArrowMain) {
     rightArrowMain.removeEventListener("click", handleRightArrowClick);
@@ -395,10 +407,14 @@ function showRoom(currentRoom) {
     leftArrowMain.removeEventListener("click", handleLeftArrowClick);
     leftArrowMain.addEventListener("click", handleLeftArrowClick);
   }
-
 }
 
+let solarSystemStatus
+
 function verifySolarSystemPuzzle() {
+
+  solarSystemStatus = false
+
   // Array com as ordens corretas dos planetas
   const correctOrder = ['1', '2', '3', '4', '5', '6', '7', '8'];
   const planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
@@ -407,11 +423,12 @@ function verifySolarSystemPuzzle() {
 
   // Percorra os inputs dos planetas
   for (let i = 0; i < correctOrder.length; i++) {
-    const inputId = `${planets[i]}Input`; // Supondo que você tenha um array chamado 'planetas' com os nomes dos planetas
+    const inputId = `${planets[i]}Input`;
     const inputValue = document.getElementById(inputId).value;
 
     // Verifique se o valor inserido é diferente da ordem correta
     if (inputValue !== correctOrder[i]) {
+      failSound.play()
       allCorrect = false; // Pelo menos uma resposta está incorreta
       break; // Pode parar o loop, já que encontrou uma resposta incorreta
     }
@@ -419,9 +436,11 @@ function verifySolarSystemPuzzle() {
 
   // Verifique o resultado da verificação
   if (allCorrect) {
-    alert("Correct");
-    // Todas as respostas estão corretas
-    // Faça algo, como exibir uma mensagem de sucesso ou redirecionar para outra página
+    sucessSound.play();
+    solarSystemStatus = true;
+    progress += 40;
+    curChallengesComp += 1;
+    updateProgressBar()
   } else {
     // Pelo menos uma resposta está incorreta
     // Faça algo, como exibir uma mensagem de erro ou destacar as respostas incorretas
@@ -439,52 +458,14 @@ function handleRightArrowClick() {
 }
 
 function moveLeft(currentRoom) {
-  const previousRoom = currentRoom;
   currentRoom -= 0.5;
   return currentRoom;
 }
 
 function moveRight(currentRoom) {
-  const previousRoom = currentRoom;
   currentRoom += 0.5;
   return currentRoom;
 }
-
-// Function that shuffles the images
-// function shuffleImages(images) {
-//   for (let i = images.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [images[i], images[j]] = [images[j], images[i]];
-//   }
-//   return images;
-// }
-
-// Gets the div that contains the images
-// const planetsPuzzleDiv = document.getElementById('planetsPuzzle');
-
-// Gets all the images in the div
-// const images = Array.from(planetsPuzzleDiv.getElementsByTagName('img'));
-
-// Shuffles the Images and Stores the Array in shuffledImages
-// const shuffledImages = shuffleImages(images);
-
-// Removes the Images From the Div
-// images.forEach((image) => {
-//   planetsPuzzleDiv.removeChild(image);
-// });
-
-// Adds the shuffled images to the Div in the new order
-// shuffledImages.forEach((image) => {
-//   planetsPuzzleDiv.appendChild(image);
-// });
-
-// if (Number.isInteger(currentRoom)) {
-//   escapeRoomDiv.className= "d-flex mainRoom"
-// }else if(previousRoom > currentRoom){
-//   escapeRoomDiv.className= "leftRoom"
-// }else if(previousRoom < currentRoom){
-//   escapeRoomDiv.className= "rightRoom"
-// }
 
 function showChallengeMonitor(currentChallenge) {
   const monitorChallenge = document.getElementById("monitorChallenges");
@@ -512,7 +493,7 @@ function showChallengeMonitor(currentChallenge) {
           <td class="trueOrFalse"></td>
         </tr>
       </table>
-      <button id="rightArrowChallengeMonitor">
+      <button disabled="true" id="rightArrowChallengeMonitor">
       <img src="../images/interactions/arrowRight.svg">
       </button>`;
 
@@ -574,9 +555,13 @@ function showChallengeMonitor(currentChallenge) {
 
         // Verifica se a célula clicada possui a classe "correctAnswer"
         if (cell.classList.contains('correctAnswer')) {
-          // Habilita o botão de avançar e preenche o background da célula com verde
           document.getElementById('rightArrowChallengeMonitor').removeAttribute('disabled');
           cell.style.backgroundColor = 'green';
+          progress += 10;
+          sucessSound.play();
+          updateProgressBar()
+        }else{
+          failSound.play()
         }
       });
     });
@@ -624,8 +609,12 @@ function showChallengeMonitor(currentChallenge) {
           // Habilita o botão de avançar e preenche o background da célula com verde
           document.getElementById('rightArrowChallengeMonitor').removeAttribute('disabled');
           cell.style.backgroundColor = 'green';
+          progress += 10;
+          sucessSound.play();
+          updateProgressBar()
         } else {
           // Desabilita o botão de avançar e remove qualquer cor de background da célula
+          failSound.play()
           document.getElementById('rightArrowChallengeMonitor').setAttribute('disabled', 'disabled');
           cell.style.backgroundColor = '';
         }
@@ -676,7 +665,12 @@ function showChallengeMonitor(currentChallenge) {
         if (cell.classList.contains('correctAnswer')) {
           // Habilita o botão de avançar e preenche o background da célula com verde
           cell.style.backgroundColor = 'green';
+          progress += 10;
+          curChallengesComp += 1;
+          sucessSound.play();
+          updateProgressBar()
         } else {
+          failSound.play()
           // Desabilita o botão de avançar e remove qualquer cor de background da célula
           cell.style.backgroundColor = '';
         }
@@ -720,8 +714,6 @@ function showChallengeMonitor(currentChallenge) {
   }
 
 }
-
-
 
 //Function That Shows the Table of The Multiple Choice Question That is Currently Displaying
 
@@ -820,9 +812,11 @@ function checkAnswers() {
 
   // Unlocks the Button to Go to the Next Challenge in the Center Room's Left Monitor
   var rightArrowButton = document.getElementById("rightArrowChallengeMonitor");
-  if (isCorrect) {
+  if (isCorrect && solarSystemStatus) {
+    progress += 30;
+    curChallengesComp+= 1;
+    sucessSound.play();
+    updateProgressBar()
     rightArrowButton.disabled = false;
-  } else {
-    rightArrowButton.disabled = true;
   }
 }

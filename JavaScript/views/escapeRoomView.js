@@ -1,3 +1,13 @@
+//Adds an Event Listener to the Loading of the Page, to Show the Introduction Modal
+
+$(document).ready(function () {
+  $('#introModal').modal('show');
+});
+
+//Defines the Variable That Contains the "p" Element Inside the Alert Modals
+
+let alertModaltxtContainer = document.getElementById('alertModalText')
+
 const totalTime = 600; // Tempo Total em Segundos do Escape Room
 let totalChallenges = 3; // Quantidade de Desafios a Completar na Primeira Sala (Vai Mudar de Sala para Sala)
 let timeLeft = totalTime;
@@ -39,6 +49,10 @@ const sucessSound = new Audio("../sounds/sucessSound.mp3")
 
 const failSound = new Audio("../sounds/failSound.mp3")
 
+//Key Locker Unlock Sound Const
+
+const keyUnlock = new Audio("../sounds/keyUnlock.mp3")
+
 //Challenges
 
 let curChallengesComp = 0; //Variable that Stores and Updates the Current Completed Challenges
@@ -70,15 +84,23 @@ function updateProgressBar() {
 
 //Variable for the First 4 Digit Code you Get After Completing the First Puzzle
 
-let firstPuzzleCode
+let firstPuzzleCode;
 
-//Variable for the Second 4 Digit Code you Get After Interacting With the Locker
+//Variable for the First Half of the 8 Digit Code for the First Room
 
-let secondPuzzleCode
+let firstHalfCode;
+
+//Variable for the Second Half of the Final 8 Digit Code for the First Room
+
+let secondHalfCode;
 
 //Variable that Stores the Current Room you are at, Initialized at 1, which is the center room
 
 let currentRoom = 1;
+
+//Variable that Stores the 8 Digit Code
+
+let final8DigitCode
 
 //Stores the User's Answers for the First Puzzle (True or False)
 
@@ -87,6 +109,14 @@ let userAnswers = [];
 //Variable for the Status of The Input of the Correct First 4 digit code
 
 let firstCodeStatus = false;
+
+//Variable for the Random Order of the Planets on the Second Puzzle
+
+let shuffledDivs;
+
+//Variable for Storing if the User has Been in the Solar System Puzzle Room
+
+let rightArrowClicked = false;
 
 //Variables for the Content of the Inventory Slots
 
@@ -119,7 +149,7 @@ function showRoom(currentRoom) {
           <img  id="screenPassword" src="../images/interactions/room1/screenPassword.png">
           </div>
           <div class="d-flex flex-column flex-wrap align-content-center">
-            <input id="input4DigitCode" type="text" style="background: none; border: none; color: black;" class="speedy" placeholder="Insert 4 Digit Code Here: ">
+            <input id="input4DigitCode" type="text" style="background: none; border: none; color: black;" class="speedy" placeholder="Insert Code Here: ">
             <button class="btn" id="screenPasswordSubmit">Submit</button>
           </div>
         <button id="rightArrowMain">
@@ -167,16 +197,27 @@ function showRoom(currentRoom) {
       </div>
       `;
 
-    //Event Listener For Submitting the 4 Digit Code
+    //Event Listener For Submitting the 4 Digit Code 
 
     const btnSubmitCode = document.getElementById("screenPasswordSubmit");
 
+    
     btnSubmitCode.addEventListener("click", function () {
-      const userAnswerFirstCode = document.getElementById("input4DigitCode").value
-      if (userAnswerFirstCode == firstPuzzleCode) {
-        firstCodeStatus = true;
-        sucessSound.play()
-        alert("Correct!")
+      const userAnswer = document.getElementById("input4DigitCode").value
+      final8DigitCode = firstHalfCode + secondHalfCode
+      if (!solarSystemStatus) {
+        if (userAnswer == firstPuzzleCode) {
+          firstCodeStatus = true;
+          sucessSound.play()
+          alertModaltxtContainer.textContent = "Correct! You Have Unlocked the Rooms to Your Left and Right, and Discovered that the Ship has a Problem With the O2 System. Complete all Puzzles to Solve the Problem and Stabilize the Ship.You Need to Find Two 4 Digit Codes to Complete the First Room"
+          $('#alertModal').modal('show');
+        }
+      } else {
+        if (userAnswer == final8DigitCode) {
+          sucessSound.play()
+          alertModaltxtContainer.textContent = "Correct! You Have Managed to Stabilize the Ship, but You Spent Too Much Fuel Stabilizing, so You Have to do an Emergency Landing in Mercury, Since it's the Closest Place the Scanners Found Fuel in. You May Exit Through the Door in the Left Room."
+          $('#alertModal').modal('show');
+        }
       }
     })
 
@@ -222,19 +263,25 @@ function showRoom(currentRoom) {
       `;
 
     const btnLocker = document.getElementById("locker");
-    firstHalfText= document.getElementById("firstHalf")
+    firstHalfText = document.getElementById("firstHalf")
 
     btnLocker.addEventListener("click", function () {
       if (!solarSystemStatus) {
-        alert("Complete the Solar System Puzzle to Have Acess to the Locker")
+        alertModaltxtContainer.textContent = "Complete the Solar System Puzzle to Have Acess to the Locker"
+        $('#alertModal').modal('show');
       } else {
-        secondPuzzleCode = generate4DigCode()
-        
+
+        keyUnlock.play();
+
+        firstHalfCode = generate4DigCode()
+
         inventorySlot3 = `<button data-bs-toggle="modal" data-bs-target="#secondCodeModal"><img src='../images/inventory/firstHalf.png'></button>`
         const inventorySlot3Tag = document.getElementById("slot3");
-        firstHalfText.innerText = secondPuzzleCode
+        firstHalfText.innerText = firstHalfCode
         inventorySlot3Tag.innerHTML = inventorySlot3;
-        alert("You've Unlocked the Locker and the First Half of the Final Code!")
+
+        alertModaltxtContainer.textContent = "You've Unlocked the Locker and the First Half of the Final Code!"
+        $('#alertModal').modal('show');
       }
     })
 
@@ -310,7 +357,10 @@ function showRoom(currentRoom) {
       return array;
     }
 
-    const shuffledDivs = shuffleArray(divs);
+    // if (!solarSystemStatus && rightArrowClicked==false) {
+    shuffledDivs = shuffleArray(divs);
+    //   rightArrowClicked= true;
+    // }
 
     //Mercury Creation
 
@@ -474,7 +524,7 @@ function showRoom(currentRoom) {
 }
 
 let firstPuzzleStatus = false;
-let solarSystemStatus;
+let solarSystemStatus = false;
 let room1LastPuzzleStatus = false;
 
 function verifySolarSystemPuzzle() {
@@ -502,23 +552,32 @@ function verifySolarSystemPuzzle() {
   // Verifique o resultado da verificação
   if (allCorrect) {
     sucessSound.play();
+
     solarSystemStatus = true;
+
     inventorySlot2 = `<img src='../images/inventory/solarSystemKey.png'></img>`
     const inventorySlot2Tag = document.getElementById("slot2");
     inventorySlot2Tag.innerHTML = inventorySlot2;
+
     progress += 40;
     curChallengesComp += 1;
     updateProgressBar()
+
+    alertModaltxtContainer.textContent = "Correct! You Have Unlocked the Key to the Locker!"
+    $('#alertModal').modal('show');
+
   } else {
     failSound.play()
-    alert("Incorrect. Try Again!")
+    alertModaltxtContainer.textContent = "Incorrect. Try Again!"
+    $('#alertModal').modal('show');
   }
 }
 
 function handleLeftArrowClick() {
 
   if (!firstCodeStatus) {
-    alert("You Should Unlock the 4 Digit Code for the Main Monitor First");
+    alertModaltxtContainer.textContent = "You Should Unlock the 4 Digit Code for the Main Monitor First!"
+    $('#alertModal').modal('show');
 
   } else {
     currentRoom = moveLeft(currentRoom);
@@ -528,7 +587,8 @@ function handleLeftArrowClick() {
 
 function handleRightArrowClick() {
   if (!firstCodeStatus) {
-    alert("You Should Unlock the 4 Digit Code for the Main Monitor First");
+    alertModaltxtContainer.textContent = "You Should Unlock the 4 Digit Code for the Main Monitor First!"
+    $('#alertModal').modal('show');
 
   } else {
     currentRoom = moveRight(currentRoom);
@@ -738,6 +798,8 @@ function showChallengeMonitor(currentChallenge) {
 
     var answerCells = tableMultipleChoice3.querySelectorAll('td');
 
+    secondHalfText = document.getElementById("secondHalf")
+
     answerCells.forEach(function (cell) {
       cell.addEventListener('click', function () {
         // Remove a classe "selected" de todas as células
@@ -756,6 +818,18 @@ function showChallengeMonitor(currentChallenge) {
           curChallengesComp += 1;
           sucessSound.play();
           updateProgressBar()
+
+          alertModaltxtContainer.textContent = "Correct! You Got the Second Half of the 8 Digit Code! Insert the Entire Code in the Main Monitor!"
+          $('#alertModal').modal('show');
+
+
+          secondHalfCode = generate4DigCode()
+
+          inventorySlot4 = `<button data-bs-toggle="modal" data-bs-target="#secondHalfCode"><img src='../images/inventory/secondHalf.png'></button>`
+          const inventorySlot4Tag = document.getElementById("slot4");
+          secondHalfText.innerText = secondHalfCode
+          inventorySlot4Tag.innerHTML = inventorySlot4;
+
         } else {
           failSound.play()
           // Desabilita o botão de avançar e remove qualquer cor de background da célula
@@ -924,17 +998,20 @@ function checkAnswers() {
     curChallengesComp += 1;
     updateProgressBar();
 
-    // Uses the Promise to Wait For All the Actions to be Completed before Showing the Alert
+    // Uses the Promise to Wait For All the Actions to be Completed before Showing the Alert Modal
     Promise.resolve()
       .then(function () {
         return new Promise(function (resolve) {
-          // Sets a One Second Timeout Before Showing the Alert
+          // Sets a One Second Timeout Before Showing the Alert Modal
           setTimeout(resolve, 1000);
         });
       })
       .then(function () {
-        // Shows the Alert
-        alert("Congrats on Solving Your First Puzzle! You Have Unlocked the 4 Digit Code to Access the Main Monitor!");
+
+        // Shows the Alert Modal
+        alertModaltxtContainer.textContent = "Congrats on Solving Your First Puzzle! You Have Unlocked the 4 Digit Code to Access the Main Monitor!"
+        $('#alertModal').modal('show');
+
         inventorySlot1 = `<button data-bs-toggle="modal" data-bs-target="#firstCodeModal"><img src='../images/inventory/firstPuzzleCode.png'></button>`
         const inventorySlot1Tag = document.getElementById("slot1");
         inventorySlot1Tag.innerHTML = inventorySlot1;

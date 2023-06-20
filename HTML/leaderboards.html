@@ -16,9 +16,25 @@
     <div class="bg">
         <div id="navbar">
         </div>
+        <div class="container d-flex flex-wrap justify-content-center">
+            <h1 class="guardians text-white" style="padding-top: 8vh; padding-bottom: 4vh;">Leaderboard</h1>
+            <table class="table text-white speedy">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>Best Time</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <!-- Leaderboard rows will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+        
     </div>
-
-    <script src="../JavaScript/views/navbarView.js"></script>
+    <script type="module" src="../JavaScript/views/navbarView.js"></script>
+    <script type="module" src="../JavaScript/views/leaderBoardDisplayView.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 

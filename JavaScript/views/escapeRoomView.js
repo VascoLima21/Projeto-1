@@ -1,3 +1,5 @@
+import * as User from "../modules/userModule.js";
+
 //Variable for the First 4 Digit Code you Get After Completing the First Puzzle
 
 let firstPuzzleCode;
@@ -41,6 +43,14 @@ let rightArrowClicked = false;
 // Variable That Stores the User's Time if the User Completes the Escape Room On Time
 
 let completionTime
+
+// Variable That Stores the First Half Text
+
+let firstHalfText
+
+// Variable That Stores the Second Half Text
+
+let secondHalfText
 
 // Variable That Stores the Last Codes Insertion Status
 
@@ -360,6 +370,8 @@ function showRoom(currentRoom) {
         let completionTimeElement = document.getElementById("completionTime");
         completionTimeElement.innerText = diffFormatted;
 
+        User.setBestTime(diffFormatted)
+
         doorOpening.play();
 
         $('#completionModal').modal('show');
@@ -454,18 +466,25 @@ function showRoom(currentRoom) {
       document.getElementById('position8')
     ];
 
-    // if (!solarSystemStatus && rightArrowClicked == false) {
-    shuffledDivs = shuffleArray(divs);
-    // rightArrowClicked = true;
+    // Remove os elementos antigos dos divs
+    divs.forEach((div) => {
+      while (div.firstChild) {
+        div.removeChild(div.firstChild);
+      }
+    });
 
-    // }
+    if (!solarSystemStatus && rightArrowClicked == false) {
+      shuffledDivs = shuffleArray(divs);
+    }
+    else {
+      shuffledDivs = divs
+    }
 
     // const firstDiv = document.getElementById('position1')
     let mercuryInput = document.createElement("input");
 
     //Mercury Creation
 
-    mercuryInputCorrectAnswer = 1;
     mercuryInput.type = "text";
     mercuryInput.id = "mercuryInput"
     mercuryInput.placeholder = "#";
@@ -484,7 +503,6 @@ function showRoom(currentRoom) {
     // const secondDiv = document.getElementById('position2')
     let venusInput = document.createElement("input");
 
-    venusInputCorrectAnswer = 2;
     venusInput.type = "text";
     venusInput.id = "venusInput"
     venusInput.placeholder = "#";
@@ -502,7 +520,6 @@ function showRoom(currentRoom) {
     // const thirdDiv = document.getElementById('position3')
     let earthInput = document.createElement("input");
 
-    earthInputCorrectAnswer = 3;
     earthInput.type = "text";
     earthInput.id = "earthInput"
     earthInput.placeholder = "#";
@@ -520,7 +537,6 @@ function showRoom(currentRoom) {
     // const fourthDiv = document.getElementById('position4')
     let marsInput = document.createElement("input");
 
-    marsInputCorrectAnswer = 4;
     marsInput.type = "text";
     marsInput.id = "marsInput"
     marsInput.placeholder = "#";
@@ -539,7 +555,6 @@ function showRoom(currentRoom) {
     // const fifthDiv = document.getElementById('position5')
     let jupiterInput = document.createElement("input");
 
-    jupiterInputCorrectAnswer = 5;
     jupiterInput.type = "text";
     jupiterInput.id = "jupiterInput"
     jupiterInput.placeholder = "#";
@@ -557,7 +572,6 @@ function showRoom(currentRoom) {
     // const sixthDiv = document.getElementById('position6')
     let saturnInput = document.createElement("input");
 
-    saturnInputCorrectAnswer = 6;
     saturnInput.type = "text";
     saturnInput.id = "saturnInput"
     saturnInput.placeholder = "#";
@@ -579,7 +593,6 @@ function showRoom(currentRoom) {
     uranusInput.id = "uranusInput"
     uranusInput.placeholder = "#";
     uranusInput.style = "width: 40px"
-    uranusInputCorrectAnswer = 7;
 
     let uranusImg = document.createElement("img");
     uranusImg.className = "planetSize";
@@ -593,7 +606,6 @@ function showRoom(currentRoom) {
     // const eighthDiv = document.getElementById('position8')
     let neptuneInput = document.createElement("input");
 
-    neptuneInputCorrectAnswer = 8;
     neptuneInput.type = "text";
     neptuneInput.id = "neptuneInput"
     neptuneInput.placeholder = "#";
@@ -622,8 +634,6 @@ function showRoom(currentRoom) {
   }
 
 }
-
-const shipDoor = document.getElementById("doorShip");
 
 function showInfo() {
   const monitorInfo = document.getElementById("monitorInfo");
@@ -880,6 +890,7 @@ function verifySolarSystemPuzzle() {
 
     alertModaltxtContainer.textContent = "Correct! You Have Unlocked the Key to the Locker!"
     $('#alertModal').modal('show');
+    rightArrowClicked = true;
 
   } else {
     failSound.play()

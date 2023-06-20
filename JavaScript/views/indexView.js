@@ -3,12 +3,12 @@ import * as User from "../modules/userModule.js";
 function userAutenthification() {
     User.init();
 
-    // CLICAR NO BOTÃO DE REGISTAR
+    
     document
         .querySelector("#registerForm")
         ?.addEventListener("submit", (event) => {
             event.preventDefault();
-            // Gestão do formulário de Registo
+            // Rgister Form Handling
             const registerUsername = document.getElementById("txtRegisterUsername");
             const registerPassword = document.getElementById("txtRegisterPassword");
             const registerPassword2 = document.getElementById("txtRegisterConfPassword");
@@ -35,7 +35,7 @@ function userAutenthification() {
             }
         });
 
-    // CLICAR NO BOTÃO DE LOGIN
+    
     document.querySelector("#logInForm")?.addEventListener("submit", (event) => {
         event.preventDefault();
         try {

@@ -132,26 +132,32 @@ function showRoom(currentRoom) {
   if (currentRoom === 1) {
     escapeRoomDiv.innerHTML =
       `
-      <div class="firstRoomBg">
+      <div class="firstRoomBg d-flex justify-content-end">
         <button id="leftArrowMain">
           <img src="../images/interactions/arrowLeft.svg">
         </button>
-        <button id="leftMonitorInteraction" data-bs-toggle="modal"
-        data-bs-target="#zoomMonitorLeftModal">
-          <img id="monitorLeft" src="../images/interactions/room1/monitorLeft.png">
-        </button>
-        <img id="warningMonitor" src="../images/interactions/room1/warningMonitor.png">
-        <button id="rightMonitorInteraction" data-bs-toggle="modal"
-        data-bs-target="#zoomMonitorRightModal">
-          <img id="monitorRight" src="../images/interactions/room1/monitorRight.png">
-        </button>  
-        <div class="d-flex align-items-center justify-content-center image-container" id="screenPasswordDiv">
-          <img  id="screenPassword" src="../images/interactions/room1/screenPassword.png">
+
+        <div id="monitorsAlign" class="">
+          <div id="topMonitors" class="d-flex">
+            <button id="leftMonitorInteraction" data-bs-toggle="modal"
+            data-bs-target="#zoomMonitorLeftModal">
+              <img id="monitorLeft" src="../images/interactions/room1/monitorLeft.png">
+            </button>
+            <img id="warningMonitor" src="../images/interactions/room1/warningMonitor.png">
+            <button id="rightMonitorInteraction" data-bs-toggle="modal"
+            data-bs-target="#zoomMonitorRightModal">
+              <img id="monitorRight" src="../images/interactions/room1/monitorRight.png">
+            </button>
+          </div>  
+          <div class="d-flex align-items-center justify-content-center image-container" id="screenPasswordDiv">
+            <img  id="screenPassword" src="../images/interactions/room1/screenPassword.png">
           </div>
           <div class="d-flex flex-column flex-wrap align-content-center">
-            <input id="input4DigitCode" type="text" style="background: none; border: none; color: black;" class="speedy" placeholder="Insert Code Here: ">
-            <button class="btn" id="screenPasswordSubmit">Submit</button>
+            <input id="input4DigitCode" type="text" style="background: none; border: none; color: black;" class="speedy text-center" placeholder="Insert Code Here: ">
+            <button class="btn speedy" id="screenPasswordSubmit">Submit</button>
           </div>
+        </div>
+
         <button id="rightArrowMain">
           <img src="../images/interactions/arrowRight.svg">
         </button>
@@ -176,7 +182,7 @@ function showRoom(currentRoom) {
               </div>
               <div id="monitorChallenges"></div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -189,7 +195,7 @@ function showRoom(currentRoom) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -201,7 +207,7 @@ function showRoom(currentRoom) {
 
     const btnSubmitCode = document.getElementById("screenPasswordSubmit");
 
-    
+
     btnSubmitCode.addEventListener("click", function () {
       const userAnswer = document.getElementById("input4DigitCode").value
       final8DigitCode = firstHalfCode + secondHalfCode
@@ -231,33 +237,33 @@ function showRoom(currentRoom) {
     escapeRoomDiv.innerHTML =
       `
       <div class="firstRoomBg d-flex">
-      <div id='inventoryBar'>
-        <table>
-          <tr style='background-color: #3B3B3B;'>
-            <td id='invBarLeftArrow'><img src='../images/interactions/Inventory Bar/invBarLeftArrow.svg'></td> 
-            <td id='slot1'>${inventorySlot1}</td> 
-            <td id='slot2'>${inventorySlot2}</td> 
-            <td id='slot3'>${inventorySlot3}</td> 
-            <td id='slot4'>${inventorySlot4}</td> 
-            <td id='invBarRightArrow'><img src='../images/interactions/Inventory Bar/invBarRightArrow.svg'></td> 
-          </tr> 
-        </table> 
-      </div>
-      <div id="lockerDiv">
-        <button id="locker">
-          <img id="lockerEdit" src="../images/interactions/room1/locker/lockerLocked.png">
-        </button>
-        <button id="amongUs">
-          <img src="../images/interactions/room1/amongUs.svg">
-        </button>
-      </div>
-        <button id="doorShip">
-          <img id="doorShipEdit" src="../images/interactions/room1/doorShip/doorShip.png">
-        </button>
-        <button id="rightArrowMain">
-          <img src="../images/interactions/arrowRight.svg">
-        </button>
-      </div>
+        <div id='inventoryBar'>
+          <table>
+            <tr style='background-color: #3B3B3B;'>
+              <td id='invBarLeftArrow'><img src='../images/interactions/Inventory Bar/invBarLeftArrow.svg'></td> 
+              <td id='slot1'>${inventorySlot1}</td> 
+              <td id='slot2'>${inventorySlot2}</td> 
+              <td id='slot3'>${inventorySlot3}</td> 
+              <td id='slot4'>${inventorySlot4}</td> 
+              <td id='invBarRightArrow'><img src='../images/interactions/Inventory Bar/invBarRightArrow.svg'></td> 
+            </tr> 
+          </table> 
+        </div>
+
+        <div id="lockerAndDoor" class="d-flex">
+          <div id="lockerDiv" class="d-flex">
+            <button id="locker">
+              <img id="lockerEdit" src="../images/interactions/room1/locker/lockerLocked.png">
+            </button>
+          </div>
+          <button id="doorShip">
+            <img id="doorShipEdit" src="../images/interactions/room1/doorShip/doorShip.png">
+          </button>
+          </div>
+          <button id="rightArrowMain">
+            <img src="../images/interactions/arrowRight.svg">
+          </button>
+        </div>  
       </div>
       
       `;
@@ -329,6 +335,7 @@ function showRoom(currentRoom) {
           </div>
           </div>
           `;
+
     //Verifies if the Inputs are Correct
 
     const btnSubmit = document.getElementById('btnSubmitSolarSystemPuzzle');
@@ -349,23 +356,16 @@ function showRoom(currentRoom) {
       document.getElementById('position8')
     ];
 
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
+    // if (!solarSystemStatus && rightArrowClicked == false) {
+      shuffledDivs = shuffleArray(divs);
+      // rightArrowClicked = true;
 
-    // if (!solarSystemStatus && rightArrowClicked==false) {
-    shuffledDivs = shuffleArray(divs);
-    //   rightArrowClicked= true;
     // }
-
-    //Mercury Creation
 
     // const firstDiv = document.getElementById('position1')
     let mercuryInput = document.createElement("input");
+
+    //Mercury Creation
 
     mercuryInputCorrectAnswer = 1;
     mercuryInput.type = "text";
@@ -509,6 +509,7 @@ function showRoom(currentRoom) {
     shuffledDivs[7].append(neptuneInput)
   }
 
+
   const rightArrowMain = document.getElementById("rightArrowMain");
   const leftArrowMain = document.getElementById("leftArrowMain");
 
@@ -521,6 +522,14 @@ function showRoom(currentRoom) {
     leftArrowMain.removeEventListener("click", handleLeftArrowClick);
     leftArrowMain.addEventListener("click", handleLeftArrowClick);
   }
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 let firstPuzzleStatus = false;

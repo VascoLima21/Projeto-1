@@ -5,7 +5,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: 60vw;
-    height: 60vh;
+    height: 70vh;
 }
 
 #solarSystemRoomBg {
@@ -22,7 +22,7 @@
 #heading {
     display: flex;
     justify-content: space-around;
-    align-content: center;
+    justify-content: flex-start;
 }
 
 button {
@@ -37,9 +37,13 @@ button {
     align-content: flex-end;
     align-items: center;
     justify-content: center;
+    margin-left: 9vw;
+    margin-right: 5vw;
 }
 
 #logoEscapeRoom {
+    margin-left: 5vw;
+    margin-right: 10vw;
     width: 10vw;
     height: auto;
     align-self: center;
@@ -127,6 +131,8 @@ button {
 #warningMonitor {
     width: 200px;
     height: auto;
+    margin-left: 5vw;
+    margin-right: 5vw;
 }
 
 #monitorLeft {
@@ -157,6 +163,14 @@ button {
     background-color: orange;
     height: 3vh;
     color: white;
+}
+
+#lockerDiv{
+    margin-right: 10vw;
+}
+
+#doorShip{
+    margin-right: 5vw;
 }
 
 .planetSize{
@@ -206,4 +220,8 @@ button {
     width: 85%;
     margin-left: 6%;
     margin-top: 6%;
+}
+
+#topMonitors{
+    margin-bottom: 5vh;
 }

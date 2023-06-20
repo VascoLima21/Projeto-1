@@ -138,7 +138,24 @@
     </div>
   </div>
 
+  <div class="modal" id="completionModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Completion Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title guardians text-center">CONGRATULATIONS!!!</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
+        <div class="modal-body">
+          <p class="speedy text-center" id="completionText">You Completed the Escape Room in <p class="speedy" id="completionTime"></p></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="../JavaScript/views/escapeRoomView.js"></script>

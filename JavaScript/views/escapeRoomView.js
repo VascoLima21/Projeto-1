@@ -38,6 +38,14 @@ let shuffledDivs;
 
 let rightArrowClicked = false;
 
+// Variable That Stores the User's Time if the User Completes the Escape Room On Time
+
+let completionTime
+
+// Variable That Stores the Last Codes Insertion Status
+
+let lastCodesDone = false;
+
 //Variables for the Content of the Inventory Slots
 
 let inventorySlot1 = "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
@@ -77,6 +85,9 @@ const failSound = new Audio("../sounds/failSound.mp3")
 
 const keyUnlock = new Audio("../sounds/keyUnlock.mp3")
 
+// Door Opening Const
+
+const doorOpening = new Audio("../sounds/doorOpening.mp3")
 
 //Adds an Event Listener to the Loading of the Page, to Show the Introduction Modal
 
@@ -110,6 +121,18 @@ function timeFormat(timeSecs) {
   return `${minutes.toString().padStart(2, "0")}:${timeSecsLeft.toString().padStart(2, "0")}`;
 }
 
+function convertSecondsToMMSS(seconds) {
+  var minutes = Math.floor(seconds / 60);
+  var secondsLeft = seconds % 60;
+
+  // Adiciona um zero à esquerda se o número de minutes ou seconds for menor que 10
+  var minFormat = minutes < 10 ? "0" + minutes : minutes;
+  var secFormat = secondsLeft < 10 ? "0" + secondsLeft : secondsLeft;
+
+  return minFormat + ":" + secFormat;
+}
+
+
 // Function to Update the Timer Each Second
 function updateTimer() {
   timeLeft--;
@@ -118,11 +141,22 @@ function updateTimer() {
   if (timeLeft <= 0) {
     clearInterval(intervalId); // Stops Executing the setInteval When the Time is Over
 
+    // Configura o evento para capturar quando o modal for fechado
+    $('#alertModal').on('hidden.bs.modal', function () {
+      // Redireciona para a homepage
+      window.location.href = '../HTML/homePage.html';
+    });
+
     alertModaltxtContainer.textContent = "Your Time is Up!!! We Hope You Enjoyed your Experience!"
     $('#alertModal').modal('show');
   }
 }
 
+// Pauses the Timer and Stores the Current Time Left
+function pauseTimer() {
+  clearInterval(intervalId);
+  completionTime = timeLeft; // Stores the Current Time Left in the Variable completionTime
+}
 
 let curChallengesComp = 0; //Variable that Stores and Updates the Current Completed Challenges
 
@@ -171,7 +205,7 @@ function showRoom(currentRoom) {
             data-bs-target="#zoomMonitorLeftModal">
               <img id="monitorLeft" src="../images/interactions/room1/monitorLeft.png">
             </button>
-            <img id="warningMonitor" src="../images/interactions/room1/warningMonitor.png">
+            <img id="warningMonitor" src="../images/interactions/room1/warningMonitorSign.png">
             <button id="rightMonitorInteraction" data-bs-toggle="modal"
             data-bs-target="#zoomMonitorRightModal">
               <img id="monitorRight" src="../images/interactions/room1/monitorRight.png">
@@ -181,7 +215,7 @@ function showRoom(currentRoom) {
             <img  id="screenPassword" src="../images/interactions/room1/screenPassword.png">
           </div>
           <div class="d-flex flex-column flex-wrap align-content-center">
-            <input id="input4DigitCode" type="text" style="background: none; border: none; color: black;" class="speedy text-center" placeholder="Insert Code Here: ">
+            <input id="input4DigitCode" type="text" class="speedy text-center" placeholder="Insert Code Here: ">
             <button class="btn speedy" id="screenPasswordSubmit">Submit</button>
           </div>
         </div>
@@ -234,14 +268,14 @@ function showRoom(currentRoom) {
       </div>
       `;
 
-    //Event Listener For Submitting the 4 Digit Code 
+    //Event Listener For Submitting the 4 Digit or the 8 Digit Code 
 
     const btnSubmitCode = document.getElementById("screenPasswordSubmit");
-
 
     btnSubmitCode.addEventListener("click", function () {
       const userAnswer = document.getElementById("input4DigitCode").value
       final8DigitCode = firstHalfCode + secondHalfCode
+
       if (!solarSystemStatus) {
         if (userAnswer == firstPuzzleCode) {
           firstCodeStatus = true;
@@ -251,8 +285,16 @@ function showRoom(currentRoom) {
         }
       } else {
         if (userAnswer == final8DigitCode) {
+
           sucessSound.play()
           alertModaltxtContainer.textContent = "Correct! You Have Managed to Stabilize the Ship, but You Spent Too Much Fuel Stabilizing, so You Have to do an Emergency Landing in Mercury, Since it's the Closest Place the Scanners Found Fuel in. You May Exit Through the Door in the Left Room."
+          $('#alertModal').modal('show');
+          lastCodesDone = true;
+
+        } else {
+          failSound.play();
+
+          alertModaltxtContainer.textContent = "Incorrect! Try Combining Both Halves of the Code you Got!"
           $('#alertModal').modal('show');
         }
       }
@@ -288,7 +330,7 @@ function showRoom(currentRoom) {
                 <img id="lockerEdit" src="../images/interactions/room1/locker/lockerLocked.png">
               </button>
             </div>
-            <button id="doorShip">
+            <button disabled="true" id="doorShip">
               <img id="doorShipEdit" src="../images/interactions/room1/doorShip/doorShip.png">
             </button>
             </div>
@@ -300,6 +342,29 @@ function showRoom(currentRoom) {
       </div>
       
       `;
+
+
+    if (lastCodesDone) {
+      const shipDoor = document.getElementById("doorShip");
+      shipDoor.disabled = false;
+
+      shipDoor.addEventListener("click", function () {
+        // Calculates the Difference Between totalTime and timeLeft
+        var diffInSeconds = parseInt(totalTime) - parseInt(timeLeft);
+
+        // Converts the Difference to the Format MM:SS
+        var diffFormatted = convertSecondsToMMSS(diffInSeconds);
+
+        pauseTimer();
+
+        let completionTimeElement = document.getElementById("completionTime");
+        completionTimeElement.innerText = diffFormatted;
+
+        doorOpening.play();
+
+        $('#completionModal').modal('show');
+      });
+    }
 
     const btnLocker = document.getElementById("locker");
     firstHalfText = document.getElementById("firstHalf")
@@ -327,47 +392,47 @@ function showRoom(currentRoom) {
   } else if (currentRoom === 1.5) {
     escapeRoomDiv.innerHTML =
       `
-      <div id="solarSystemRoomBg">
-        <div id="arrowAndPuzzleDiv" class="d-flex flex-row justify-content-center align-content-center">
-          <button id="leftArrowMain">
-            <img src="../images/interactions/arrowLeft.svg">
-          </button>
-            <div id="solarSystemPuzzleBg" class="d-flex align-items-end">
-              <div id="position1">
-              </div>
-              <div id="position2">
-              </div>
-              <div id="position3">
-              </div>
-              <div id="position4">
-              </div>
-              <div id="position5">
-              </div>
-              <div id="position6">
-              </div>
-              <div id="position7">
-              </div>
-              <div id="position8">
-              </div>
-          </div>
-          </div>
-          <div class="text-center">
-            <button class="btn"  id="btnSubmitSolarSystemPuzzle">Submit</button>
-          </div>
-          <div id='inventoryBar'>
-          <table>
-          <tr style='background-color: #3B3B3B;'>
-          <td id='invBarLeftArrow'><img src='../images/interactions/Inventory Bar/invBarLeftArrow.svg'></td> 
-          <td id='slot1'>${inventorySlot1}</td> 
-          <td id='slot2'>${inventorySlot2}</td> 
-          <td id='slot3'>${inventorySlot3}</td> 
-          <td id='slot4'>${inventorySlot4}</td> 
-          <td id='invBarRightArrow'><img src='../images/interactions/Inventory Bar/invBarRightArrow.svg'></td> 
-          </tr> 
-          </table> 
-          </div>
-          </div>
-          `;
+    <div id="solarSystemRoomBg">
+    <div id="arrowAndPuzzleDiv" class="d-flex flex-row justify-content-center align-content-center">
+    <button id="leftArrowMain">
+    <img src="../images/interactions/arrowLeft.svg">
+    </button>
+    <div id="solarSystemPuzzleBg" class="d-flex align-items-end">
+    <div id="position1">
+    </div>
+    <div id="position2">
+    </div>
+    <div id="position3">
+    </div>
+    <div id="position4">
+    </div>
+    <div id="position5">
+    </div>
+    <div id="position6">
+    </div>
+    <div id="position7">
+    </div>
+    <div id="position8">
+    </div>
+    </div>
+    </div>
+    <div class="text-center">
+    <button class="btn"  id="btnSubmitSolarSystemPuzzle">Submit</button>
+    </div>
+    <div id='inventoryBar'>
+    <table>
+    <tr style='background-color: #3B3B3B;'>
+    <td id='invBarLeftArrow'><img src='../images/interactions/Inventory Bar/invBarLeftArrow.svg'></td> 
+    <td id='slot1'>${inventorySlot1}</td> 
+    <td id='slot2'>${inventorySlot2}</td> 
+    <td id='slot3'>${inventorySlot3}</td> 
+    <td id='slot4'>${inventorySlot4}</td> 
+    <td id='invBarRightArrow'><img src='../images/interactions/Inventory Bar/invBarRightArrow.svg'></td> 
+    </tr> 
+    </table> 
+    </div>
+    </div>
+    `;
 
     //Verifies if the Inputs are Correct
 
@@ -555,7 +620,10 @@ function showRoom(currentRoom) {
     leftArrowMain.removeEventListener("click", handleLeftArrowClick);
     leftArrowMain.addEventListener("click", handleLeftArrowClick);
   }
+
 }
+
+const shipDoor = document.getElementById("doorShip");
 
 function showInfo() {
   const monitorInfo = document.getElementById("monitorInfo");

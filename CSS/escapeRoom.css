@@ -159,21 +159,21 @@ button {
     background-size: cover;
 }
 
-#btnSubmitSolarSystemPuzzle{
+#btnSubmitSolarSystemPuzzle {
     background-color: orange;
     height: 3vh;
     color: white;
 }
 
-#lockerDiv{
+#lockerDiv {
     margin-right: 5vw;
 }
 
-#doorShip{
+#doorShip {
     margin-right: 10vw;
 }
 
-.planetSize{
+.planetSize {
     width: 5vw;
     height: auto;
 }
@@ -209,19 +209,24 @@ button {
     height: 100%;
 }
 
-#screenPasswordSubmit{
+#screenPasswordSubmit {
     background-color: orangered;
     width: 5vw;
     height: auto;
     align-self: center;
 }
 
-#arrowAndPuzzleDiv{
+#arrowAndPuzzleDiv {
     width: 85%;
     margin-left: 6%;
     margin-top: 6%;
 }
 
-#topMonitors{
+#topMonitors {
     margin-bottom: 5vh;
+}
+
+#input4DigitCode {
+    border-radius: 5px;
+    margin-bottom: 1vh;
 }

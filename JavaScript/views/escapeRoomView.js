@@ -1,87 +1,3 @@
-//Adds an Event Listener to the Loading of the Page, to Show the Introduction Modal
-
-$(document).ready(function () {
-  $('#introModal').modal('show');
-});
-
-//Defines the Variable That Contains the "p" Element Inside the Alert Modals
-
-let alertModaltxtContainer = document.getElementById('alertModalText')
-
-const totalTime = 600; // Tempo Total em Segundos do Escape Room
-let totalChallenges = 3; // Quantidade de Desafios a Completar na Primeira Sala (Vai Mudar de Sala para Sala)
-let timeLeft = totalTime;
-const timer = document.getElementById("timer");
-let timeLeftElement = document.createElement("p");
-
-timeLeftElement.id = "timeLeft";
-timeLeftElement.className = "speedy";
-timeLeftElement.textContent = timeFormat(timeLeft);
-
-timer.appendChild(timeLeftElement);
-
-// Função para formatar o tempo no formato MM:SS
-function timeFormat(timeSecs) {
-  const minutes = Math.floor(timeSecs / 60);
-  const timeSecsLeft = timeSecs % 60;
-  return `${minutes.toString().padStart(2, "0")}:${timeSecsLeft.toString().padStart(2, "0")}`;
-}
-
-// Função para atualizar o temporizador a cada segundo
-function updateTimer() {
-  timeLeft--;
-  timeLeftElement.textContent = timeFormat(timeLeft);
-
-  if (timeLeft <= 0) {
-    clearInterval(intervalId); // Para a execução do setInterval quando o tempo acabar
-    // Tempo esgotado, mensagem de erro, etc...
-  }
-}
-
-// Inicia o temporizador
-const intervalId = setInterval(updateTimer, 1000);
-
-//Sucess Sound Const
-
-const sucessSound = new Audio("../sounds/sucessSound.mp3")
-
-//Fail Sound Const
-
-const failSound = new Audio("../sounds/failSound.mp3")
-
-//Key Locker Unlock Sound Const
-
-const keyUnlock = new Audio("../sounds/keyUnlock.mp3")
-
-//Challenges
-
-let curChallengesComp = 0; //Variable that Stores and Updates the Current Completed Challenges
-
-const challengesCompleted = document.getElementById("challengesCompleted");
-
-let challengesCompElement = document.createElement("p");
-
-challengesCompElement.className = "speedy text-center";
-challengesCompElement.textContent = `${curChallengesComp}/${totalChallenges}`;
-
-challengesCompleted.appendChild(challengesCompElement);
-
-//Barra de Progresso
-
-// Largura da Barra de Progresso em Percentagem
-let progress = 0;
-
-// Calcular a posição do foguetão e da Janelinha com o Progresso
-
-// const windowProgress= document.getElementById("windowProgress")
-
-function updateProgressBar() {
-  const progressElement = document.getElementById("barFill");
-  progressElement.style.width = progress + "%";
-
-  challengesCompElement.textContent = `${curChallengesComp}/${totalChallenges}`;
-}
-
 //Variable for the First 4 Digit Code you Get After Completing the First Puzzle
 
 let firstPuzzleCode;
@@ -125,7 +41,115 @@ let inventorySlot2 = "<img src='../images/interactions/Inventory Bar/rectangleIn
 let inventorySlot3 = "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
 let inventorySlot4 = "<img src='../images/interactions/Inventory Bar/rectangleInvBar.svg'>";
 
+//Variables for the Different Educational Content in the Right Monitor Modal
+
+let firstMessage = "When the boosters of a rocket run out of fuel, they are detached from the rest of the rocket (usually with some kind of small explosive charge or explosive bolts) and fall away."
+
+let secondMessage = "Yuri Gagarin from the Soviet Union was the first human in space. His vehicle, Vostok 1 circled Earth at a speed of 27,400 kilometers per hour with the flight lasting 108 minutes."
+
+let thirdMessage = "Saturn is a funny-looking planet. True, but it's not the only planet with rings. Jupiter, Uranus and Neptune have rings too."
+
+let fourthMessage = "There are 8 Planets in the Solar System, Which are Mercury, Venus, Earth, Mars, Which Constitute the Group of Planets Known as Terrestrial, and Then There are Jupiter, Saturn, Uranus, Neptune"
+
+let fifthMessage = "Gravity is the Force That Pulls us to the Surface of the Earth, Keeps the Planets in Orbit Around the Sun and Causes the Formation of Planets, Stars and Galaxies."
+
+let sixthMessage = "The Sun is the Only Star in our Solar System. It is the Center of our Solar System, and its Gravity Holds the Solar System Together. Everything in our Solar System Revolves Around it, the Planets, Asteroids, Comets, and Tiny Bits of Space Debris."
+
+let seventhMessage = "The Milky Way is a huge collection of stars, dust and gas. It's called a spiral galaxy because if you could view it from the top or bottom, it would look like a spinning pinwheel. The Sun is located on one of the spiral arms, about 25,000 light-years away from the center of the galaxy."
+
+// Inicia o temporizador
+
+const intervalId = setInterval(updateTimer, 1000);
+
+//Sucess Sound Const
+
+const sucessSound = new Audio("../sounds/sucessSound.mp3")
+
+//Fail Sound Const
+
+const failSound = new Audio("../sounds/failSound.mp3")
+
+//Key Locker Unlock Sound Const
+
+const keyUnlock = new Audio("../sounds/keyUnlock.mp3")
+
+
+//Adds an Event Listener to the Loading of the Page, to Show the Introduction Modal
+
+$(document).ready(function () {
+  $('#introModal').modal('show');
+});
+
+//Defines the Variable That Contains the "p" Element Inside the Alert Modals
+
+let alertModaltxtContainer = document.getElementById('alertModalText')
+
+//Challenges
+
+const totalTime = 600; // Total Time in Seconds for the Escape Room
+let totalChallenges = 3; // Amount of Challenges that You Have to Complete in the First Room (varies from room to room)
+let timeLeft = totalTime;
+const timer = document.getElementById("timer");
+let timeLeftElement = document.createElement("p");
+
+timeLeftElement.id = "timeLeft";
+timeLeftElement.className = "speedy";
+timeLeftElement.textContent = timeFormat(timeLeft);
+
+timer.appendChild(timeLeftElement);
+
+// Function that Formats the Time in the Format MM:SS
+
+function timeFormat(timeSecs) {
+  const minutes = Math.floor(timeSecs / 60);
+  const timeSecsLeft = timeSecs % 60;
+  return `${minutes.toString().padStart(2, "0")}:${timeSecsLeft.toString().padStart(2, "0")}`;
+}
+
+// Function to Update the Timer Each Second
+function updateTimer() {
+  timeLeft--;
+  timeLeftElement.textContent = timeFormat(timeLeft);
+
+  if (timeLeft <= 0) {
+    clearInterval(intervalId); // Stops Executing the setInteval When the Time is Over
+
+    alertModaltxtContainer.textContent = "Your Time is Up!!! We Hope You Enjoyed your Experience!"
+    $('#alertModal').modal('show');
+  }
+}
+
+
+let curChallengesComp = 0; //Variable that Stores and Updates the Current Completed Challenges
+
+const challengesCompleted = document.getElementById("challengesCompleted");
+
+let challengesCompElement = document.createElement("p");
+
+challengesCompElement.className = "speedy text-center";
+challengesCompElement.textContent = `${curChallengesComp}/${totalChallenges}`;
+
+challengesCompleted.appendChild(challengesCompElement);
+
+//Barra de Progresso
+
+// Largura da Barra de Progresso em Percentagem
+let progress = 0;
+
+// Calcular a posição do foguetão e da Janelinha com o Progresso
+
+// const windowProgress= document.getElementById("windowProgress")
+
+function updateProgressBar() {
+  const progressElement = document.getElementById("barFill");
+  progressElement.style.width = progress + "%";
+
+  challengesCompElement.textContent = `${curChallengesComp}/${totalChallenges}`;
+}
+
+
 // Function to Show The Rooms
+
 function showRoom(currentRoom) {
   const escapeRoomDiv = document.getElementById("escapeRoom");
 
@@ -191,8 +215,11 @@ function showRoom(currentRoom) {
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">Learn About Space!</h4>
+                <h4 class="modal-title guardians">Learn About Space!</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div id="monitorInfo">
+                <p id="txtInfo" class="speedy text-center"></p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
@@ -250,19 +277,21 @@ function showRoom(currentRoom) {
           </table> 
         </div>
 
-        <div id="lockerAndDoor" class="d-flex">
-          <div id="lockerDiv" class="d-flex">
-            <button id="locker">
-              <img id="lockerEdit" src="../images/interactions/room1/locker/lockerLocked.png">
+        <div id="lockerDoorArrow" class="d-flex">
+          
+            <div id="lockerDiv" class="d-flex">
+              <button id="locker">
+                <img id="lockerEdit" src="../images/interactions/room1/locker/lockerLocked.png">
+              </button>
+            </div>
+            <button id="doorShip">
+              <img id="doorShipEdit" src="../images/interactions/room1/doorShip/doorShip.png">
             </button>
-          </div>
-          <button id="doorShip">
-            <img id="doorShipEdit" src="../images/interactions/room1/doorShip/doorShip.png">
-          </button>
-          </div>
-          <button id="rightArrowMain">
-            <img src="../images/interactions/arrowRight.svg">
-          </button>
+            </div>
+            <button id="rightArrowMain">
+              <img src="../images/interactions/arrowRight.svg">
+            </button>
+          
         </div>  
       </div>
       
@@ -357,8 +386,8 @@ function showRoom(currentRoom) {
     ];
 
     // if (!solarSystemStatus && rightArrowClicked == false) {
-      shuffledDivs = shuffleArray(divs);
-      // rightArrowClicked = true;
+    shuffledDivs = shuffleArray(divs);
+    // rightArrowClicked = true;
 
     // }
 

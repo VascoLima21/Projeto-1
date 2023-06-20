@@ -14,6 +14,10 @@ let secondHalfCode;
 
 let currentRoom = 1;
 
+// Variable that Stores the Current Info Text you are at
+
+let currentTextInfo = 1;
+
 //Variable that Stores the 8 Digit Code
 
 let final8DigitCode
@@ -219,10 +223,10 @@ function showRoom(currentRoom) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
               <div id="monitorInfo">
-                <p id="txtInfo" class="speedy text-center"></p>
+                
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
+              <div id = "infoMonitorFooter" class="modal-footer">
+                
               </div>
             </div>
           </div>
@@ -551,6 +555,211 @@ function showRoom(currentRoom) {
     leftArrowMain.removeEventListener("click", handleLeftArrowClick);
     leftArrowMain.addEventListener("click", handleLeftArrowClick);
   }
+}
+
+function showInfo() {
+  const monitorInfo = document.getElementById("monitorInfo");
+  const infoMonitorFooter = document.getElementById("infoMonitorFooter");
+
+  if (currentTextInfo == 1) {
+    monitorInfo.innerHTML =
+      `
+    <p id="txtInfo" class="speedy text-center">${firstMessage}</p>
+    `;
+
+    infoMonitorFooter.innerHTML =
+      `
+    <button id="rightArrowInfoMonitor">
+      <img src="../images/interactions/arrowRight.svg">
+    </button>
+    <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
+    `;
+
+    const nextInfoButton = document.getElementById("rightArrowInfoMonitor");
+
+    if (nextInfoButton) {
+      nextInfoButton.removeEventListener("click", handleNextInfoButton);
+      nextInfoButton.addEventListener("click", handleNextInfoButton);
+    }
+  } else if (currentTextInfo == 2) {
+    monitorInfo.innerHTML =
+      `
+    <p id="txtInfo" class="speedy text-center">${secondMessage}</p>
+    `;
+
+    infoMonitorFooter.innerHTML =
+      `
+    <button id="leftArrowInfoMonitor">
+      <img src="../images/interactions/arrowLeft.svg">
+    </button>
+    <button id="rightArrowInfoMonitor">
+      <img src="../images/interactions/arrowRight.svg">
+    </button>
+    <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
+    `;
+
+    const previousInfoButton = document.getElementById("leftArrowInfoMonitor");
+    const nextInfoButton = document.getElementById("rightArrowInfoMonitor");
+
+    if (previousInfoButton) {
+      previousInfoButton.removeEventListener("click", handlePreviousInfoButton);
+      previousInfoButton.addEventListener("click", handlePreviousInfoButton);
+    }
+
+    if (nextInfoButton) {
+      nextInfoButton.removeEventListener("click", handleNextInfoButton);
+      nextInfoButton.addEventListener("click", handleNextInfoButton);
+    }
+
+  } else if (currentTextInfo == 3) {
+    monitorInfo.innerHTML =
+      `
+    <p id="txtInfo" class="speedy text-center">${thirdMessage}</p>
+    `;
+
+    infoMonitorFooter.innerHTML =
+      `
+    <button id="leftArrowInfoMonitor">
+      <img src="../images/interactions/arrowLeft.svg">
+    </button>
+    <button id="rightArrowInfoMonitor">
+      <img src="../images/interactions/arrowRight.svg">
+    </button>
+    <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
+    `;
+
+    const previousInfoButton = document.getElementById("leftArrowInfoMonitor");
+    const nextInfoButton = document.getElementById("rightArrowInfoMonitor");
+
+    if (previousInfoButton) {
+      previousInfoButton.removeEventListener("click", handlePreviousInfoButton);
+      previousInfoButton.addEventListener("click", handlePreviousInfoButton);
+    }
+
+    if (nextInfoButton) {
+      nextInfoButton.removeEventListener("click", handleNextInfoButton);
+      nextInfoButton.addEventListener("click", handleNextInfoButton);
+    }
+  } else if (currentTextInfo == 4) {
+    monitorInfo.innerHTML =
+      `
+    <p id="txtInfo" class="speedy text-center">${fourthMessage}</p>
+    `;
+
+    infoMonitorFooter.innerHTML =
+      `
+    <button id="leftArrowInfoMonitor">
+      <img src="../images/interactions/arrowLeft.svg">
+    </button>
+    <button id="rightArrowInfoMonitor">
+      <img src="../images/interactions/arrowRight.svg">
+    </button>
+    <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
+    `;
+
+    const previousInfoButton = document.getElementById("leftArrowInfoMonitor");
+    const nextInfoButton = document.getElementById("rightArrowInfoMonitor");
+
+    if (previousInfoButton) {
+      previousInfoButton.removeEventListener("click", handlePreviousInfoButton);
+      previousInfoButton.addEventListener("click", handlePreviousInfoButton);
+    }
+
+    if (nextInfoButton) {
+      nextInfoButton.removeEventListener("click", handleNextInfoButton);
+      nextInfoButton.addEventListener("click", handleNextInfoButton);
+    }
+  } else if (currentTextInfo == 5) {
+    monitorInfo.innerHTML =
+      `
+    <p id="txtInfo" class="speedy text-center">${fifthMessage}</p>
+    `;
+
+    infoMonitorFooter.innerHTML =
+      `
+    <button id="leftArrowInfoMonitor">
+      <img src="../images/interactions/arrowLeft.svg">
+    </button>
+    <button id="rightArrowInfoMonitor">
+      <img src="../images/interactions/arrowRight.svg">
+    </button>
+    <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
+    `;
+
+    const previousInfoButton = document.getElementById("leftArrowInfoMonitor");
+    const nextInfoButton = document.getElementById("rightArrowInfoMonitor");
+
+    if (previousInfoButton) {
+      previousInfoButton.removeEventListener("click", handlePreviousInfoButton);
+      previousInfoButton.addEventListener("click", handlePreviousInfoButton);
+    }
+
+    if (nextInfoButton) {
+      nextInfoButton.removeEventListener("click", handleNextInfoButton);
+      nextInfoButton.addEventListener("click", handleNextInfoButton);
+    }
+  } else if (currentTextInfo == 6) {
+    monitorInfo.innerHTML =
+      `
+    <p id="txtInfo" class="speedy text-center">${sixthMessage}</p>
+    `;
+
+    infoMonitorFooter.innerHTML =
+      `
+    <button id="leftArrowInfoMonitor">
+      <img src="../images/interactions/arrowLeft.svg">
+    </button>
+    <button id="rightArrowInfoMonitor">
+      <img src="../images/interactions/arrowRight.svg">
+    </button>
+    <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
+    `;
+
+    const previousInfoButton = document.getElementById("leftArrowInfoMonitor");
+    const nextInfoButton = document.getElementById("rightArrowInfoMonitor");
+
+    if (previousInfoButton) {
+      previousInfoButton.removeEventListener("click", handlePreviousInfoButton);
+      previousInfoButton.addEventListener("click", handlePreviousInfoButton);
+    }
+
+    if (nextInfoButton) {
+      nextInfoButton.removeEventListener("click", handleNextInfoButton);
+      nextInfoButton.addEventListener("click", handleNextInfoButton);
+    }
+  } else if (currentTextInfo == 7) {
+    monitorInfo.innerHTML =
+      `
+    <p id="txtInfo" class="speedy text-center">${seventhMessage}</p>
+    `;
+
+    infoMonitorFooter.innerHTML =
+      `
+    <button id="leftArrowInfoMonitor">
+      <img src="../images/interactions/arrowLeft.svg">
+    </button>
+    <button type="button" class="btn btn-secondary speedy" data-bs-dismiss="modal">Close</button>
+    `;
+
+    const previousInfoButton = document.getElementById("leftArrowInfoMonitor");
+
+    if (previousInfoButton) {
+      previousInfoButton.removeEventListener("click", handlePreviousInfoButton);
+      previousInfoButton.addEventListener("click", handlePreviousInfoButton);
+    }
+  }
+}
+
+//Changes the Displayed Info to the Next One or Previous One
+
+function handleNextInfoButton() {
+  currentTextInfo += 1;
+  showInfo();
+}
+
+function handlePreviousInfoButton() {
+  currentTextInfo -= 1;
+  showInfo();
 }
 
 function shuffleArray(array) {
@@ -946,7 +1155,7 @@ leftMonitorInteraction.addEventListener("click", function () {
 const rightMonitorInteraction = document.getElementById("rightMonitorInteraction");
 
 rightMonitorInteraction.addEventListener("click", function () {
-  showChallengeMonitor(currentChallengeMonitor);
+  showInfo();
 });
 
 //Changes the Displayed Challenge to the Next One

@@ -429,7 +429,7 @@ function showRoom(currentRoom) {
     </div>
     </div>
     <div class="text-center">
-    <button class="btn"  id="btnSubmitSolarSystemPuzzle">Submit</button>
+    <button class="btn text-center"  id="btnSubmitSolarSystemPuzzle">Submit</button>
     </div>
     <div id='inventoryBar'>
     <table>
@@ -445,6 +445,11 @@ function showRoom(currentRoom) {
     </div>
     </div>
     `;
+
+    if (solarSystemStatus) {
+      const btnSubmitSolarSystem = document.getElementById("btnSubmitSolarSystemPuzzle");
+      btnSubmitSolarSystem.disabled = true;
+    }
 
     //Verifies if the Inputs are Correct
 
@@ -466,7 +471,7 @@ function showRoom(currentRoom) {
       document.getElementById('position8')
     ];
 
-    // Remove os elementos antigos dos divs
+    // Removes the Old Elements From the Divs
     divs.forEach((div) => {
       while (div.firstChild) {
         div.removeChild(div.firstChild);
@@ -480,7 +485,6 @@ function showRoom(currentRoom) {
       shuffledDivs = divs
     }
 
-    // const firstDiv = document.getElementById('position1')
     let mercuryInput = document.createElement("input");
 
     //Mercury Creation
@@ -850,7 +854,6 @@ function shuffleArray(array) {
 
 let firstPuzzleStatus = false;
 let solarSystemStatus = false;
-let room1LastPuzzleStatus = false;
 
 function verifySolarSystemPuzzle() {
 
@@ -897,6 +900,8 @@ function verifySolarSystemPuzzle() {
     alertModaltxtContainer.textContent = "Incorrect. Try Again!"
     $('#alertModal').modal('show');
   }
+  const btnSolarSystemSubmit = document.getElementById("btnSubmitSolarSystemPuzzle")
+  btnSolarSystemSubmit.disabled = true;
 }
 
 function handleLeftArrowClick() {

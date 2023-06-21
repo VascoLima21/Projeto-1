@@ -2,11 +2,13 @@ let users;
 let userLogged;
 
 // Loads Users From the Local Storage
+
 export function init() {
   users = localStorage.users ? JSON.parse(localStorage.users) : [];
 }
 
 // Register User
+
 export function register(username, password, email, country, gender) {
   if (users.some((user) => user.username === username)) {
     throw Error(`User with username "${username}" already exists!`);
@@ -21,6 +23,7 @@ export function register(username, password, email, country, gender) {
 }
 
 // User LogIn
+
 export function login(username, password) {
   const user = users.find(
     (user) => user.username === username && user.password === password
@@ -34,16 +37,19 @@ export function login(username, password) {
 }
 
 // User LogOut
+
 export function logout() {
   sessionStorage.removeItem("loggedUser");
 }
 
 // Verifies if someone is logged in
+
 export function isLogged() {
   return sessionStorage.getItem("loggedUser") ? true : false;
 }
 
 // Returns logged user
+
 export function getUserLogged() {
   return JSON.parse(sessionStorage.getItem("loggedUser"));
 }
@@ -54,8 +60,8 @@ export function setBestTime(userBestTime) {
   var index = -1;
 
   // Iterate over the objectArray to find the desired index
+
   for (var i = 0; i < objectArray.length; i++) {
-    // Assuming there is a function called getUserLogged that returns the current user's username
     if (objectArray[i].username === getUserLogged().username) {
       index = i; // Store the index when the condition is met
       break; // Exit the loop once the index is found

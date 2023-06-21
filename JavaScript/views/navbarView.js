@@ -1,10 +1,11 @@
 import * as User from "../modules/userModule.js";
 
-// Cria uma navbar
+// Creates a NavBar
+
 function createNavbar() {
     User.init();
 
-    //Vai buscar o utilizador que está logado
+    // Gets the User That is Logged
     var user= User.getUserLogged(); 
     
     // Cria a div da navbar
@@ -17,22 +18,28 @@ function createNavbar() {
     console.log(user.profilePic)
     console.log(user)
 
-    // Cria o Ícone Como um link
+    // Creates the Icon as a Link
+
     var iconLink = document.createElement("a");
     iconLink.href = "../HTML/homePage.html";
 
-    // Cria a imagem do Ícone
+    // Creates the Icon's Image
+
     var icon = document.createElement("img");
     icon.className= "logo"
     icon.src = "../images/logo/Stellar Escape Logo Final BW R.svg";
 
-    // Adiciona a imagem como filho do link
-    iconLink.appendChild(icon);
+    // Adds the Image as Child of the Link
 
-    // Adiciona o link com a imagem à navbar
+    iconLink.appendChild(icon);
+    
+
+    // Adds the Link With the Image to the Navbar
+
     navbar.appendChild(iconLink);
 
-    // Cria os links da navbar
+    // Creates the NavBar's Links
+
     var links = [
         { text: "Achievements", url: "../HTML/achievementsPage.html" },
         { text: "Leaderboards", url: "../HTML/leaderboards.html" },
@@ -50,5 +57,6 @@ function createNavbar() {
     navbar.appendChild(rectangle);
 }
 
-// Chama a função para criar a navbar
+// Calls the Function to Create the NavBar
+
 createNavbar();

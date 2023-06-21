@@ -8,7 +8,9 @@ function userAutenthification() {
         .querySelector("#registerForm")
         ?.addEventListener("submit", (event) => {
             event.preventDefault();
+
             // Rgister Form Handling
+
             const registerUsername = document.getElementById("txtRegisterUsername");
             const registerPassword = document.getElementById("txtRegisterPassword");
             const registerPassword2 = document.getElementById("txtRegisterConfPassword");
@@ -26,7 +28,9 @@ function userAutenthification() {
                     "User registered with success!",
                     "success"
                 );
+
                 // Wait 1 second before reloading, so the user can see the login success message
+
                 setTimeout(() => {
                     window.location.href = '../HTML/homePage.html';
                 }, 1000);
@@ -44,7 +48,9 @@ function userAutenthification() {
                 document.getElementById("txtPasswordLogIn").value
             );
             displayMessage("alertLogIn", "User logged in with success!", "success");
+
             // Wait 1 second before reloading, so the user can see the login success message
+            
             setTimeout(() => {
                 window.location.href = '../HTML/homePage.html';
             }, 1000);

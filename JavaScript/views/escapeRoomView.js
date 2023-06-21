@@ -79,7 +79,7 @@ let sixthMessage = "The Sun is the Only Star in our Solar System. It is the Cent
 
 let seventhMessage = "The Milky Way is a huge collection of stars, dust and gas. It's called a spiral galaxy because if you could view it from the top or bottom, it would look like a spinning pinwheel. The Sun is located on one of the spiral arms, about 25,000 light-years away from the center of the galaxy."
 
-// Inicia o temporizador
+// Starts the Timer
 
 const intervalId = setInterval(updateTimer, 1000);
 
@@ -135,7 +135,7 @@ function convertSecondsToMMSS(seconds) {
   var minutes = Math.floor(seconds / 60);
   var secondsLeft = seconds % 60;
 
-  // Adiciona um zero à esquerda se o número de minutes ou seconds for menor que 10
+  // Adds a 0 to the Left if the Number of Minutes or Seconds is Less than 10
   var minFormat = minutes < 10 ? "0" + minutes : minutes;
   var secFormat = secondsLeft < 10 ? "0" + secondsLeft : secondsLeft;
 
@@ -149,11 +149,11 @@ function updateTimer() {
   timeLeftElement.textContent = timeFormat(timeLeft);
 
   if (timeLeft <= 0) {
-    clearInterval(intervalId); // Stops Executing the setInteval When the Time is Over
+    clearInterval(intervalId); // Stops Executing the setInterval When the Time is Over
 
-    // Configura o evento para capturar quando o modal for fechado
+    // Configures the Event to Capture when the Modal is Closed
     $('#alertModal').on('hidden.bs.modal', function () {
-      // Redireciona para a homepage
+      // Redirects to the HomePage
       window.location.href = '../HTML/homePage.html';
     });
 
@@ -179,14 +179,11 @@ challengesCompElement.textContent = `${curChallengesComp}/${totalChallenges}`;
 
 challengesCompleted.appendChild(challengesCompElement);
 
-//Barra de Progresso
+//Progress Bar
 
-// Largura da Barra de Progresso em Percentagem
+// Progress Bar Width in %
+
 let progress = 0;
-
-// Calcular a posição do foguetão e da Janelinha com o Progresso
-
-// const windowProgress= document.getElementById("windowProgress")
 
 function updateProgressBar() {
   const progressElement = document.getElementById("barFill");
@@ -194,7 +191,6 @@ function updateProgressBar() {
 
   challengesCompElement.textContent = `${curChallengesComp}/${totalChallenges}`;
 }
-
 
 // Function to Show The Rooms
 
@@ -353,33 +349,40 @@ function showRoom(currentRoom) {
       
       `;
 
+    //Verifies if the 8 Digit Code has Been Correctly Answered
 
     if (lastCodesDone) {
       const shipDoor = document.getElementById("doorShip");
       shipDoor.disabled = false;
-
+    
       shipDoor.addEventListener("click", function () {
-        // Calculates the Difference Between totalTime and timeLeft
         var diffInSeconds = parseInt(totalTime) - parseInt(timeLeft);
-
-        // Converts the Difference to the Format MM:SS
         var diffFormatted = convertSecondsToMMSS(diffInSeconds);
-
+    
         pauseTimer();
-
+    
         let completionTimeElement = document.getElementById("completionTime");
         completionTimeElement.innerText = diffFormatted;
-
-        User.setBestTime(diffFormatted)
-
+    
+        User.setBestTime(diffFormatted);
+    
         doorOpening.play();
-
-        $('#completionModal').modal('show');
+    
+        $('#completionModal').modal('show'); // Show the modal
+    
+        // Configures the Event for When the Modal is Closed
+        $('#completionModal').on('hidden.bs.modal', function () {
+          // Redirects to the HomePage
+          window.location.href = '../HTML/homePage.html';
+        });
+    
       });
     }
-
+    
     const btnLocker = document.getElementById("locker");
     firstHalfText = document.getElementById("firstHalf")
+
+    //Adds an Event Listener to the Locker in the Left Room to Add Interactions With It
 
     btnLocker.addEventListener("click", function () {
       if (!solarSystemStatus) {
@@ -396,7 +399,7 @@ function showRoom(currentRoom) {
         firstHalfText.innerText = firstHalfCode
         inventorySlot3Tag.innerHTML = inventorySlot3;
 
-        alertModaltxtContainer.textContent = "You've Unlocked the Locker and the First Half of the Final Code!"
+        alertModaltxtContainer.textContent = "You've Unlocked the Locker and the First Half of the Final Code! Check the Left Monitor in the Center Room for Another Available Puzzle"
         $('#alertModal').modal('show');
       }
     })
@@ -504,7 +507,6 @@ function showRoom(currentRoom) {
 
     //Venus Creation
 
-    // const secondDiv = document.getElementById('position2')
     let venusInput = document.createElement("input");
 
     venusInput.type = "text";
@@ -521,7 +523,6 @@ function showRoom(currentRoom) {
 
     //Earth Creation
 
-    // const thirdDiv = document.getElementById('position3')
     let earthInput = document.createElement("input");
 
     earthInput.type = "text";
@@ -538,7 +539,6 @@ function showRoom(currentRoom) {
 
     //Mars Creation
 
-    // const fourthDiv = document.getElementById('position4')
     let marsInput = document.createElement("input");
 
     marsInput.type = "text";
@@ -555,8 +555,6 @@ function showRoom(currentRoom) {
 
     //Jupiter Creation
 
-
-    // const fifthDiv = document.getElementById('position5')
     let jupiterInput = document.createElement("input");
 
     jupiterInput.type = "text";
@@ -573,7 +571,6 @@ function showRoom(currentRoom) {
 
     //Saturn Creation
 
-    // const sixthDiv = document.getElementById('position6')
     let saturnInput = document.createElement("input");
 
     saturnInput.type = "text";
@@ -590,7 +587,6 @@ function showRoom(currentRoom) {
 
     //Uranus Creation
 
-    // const seventhDiv = document.getElementById('position7')
     let uranusInput = document.createElement("input");
 
     uranusInput.type = "text";
@@ -607,7 +603,6 @@ function showRoom(currentRoom) {
 
     //Neptune Creation
 
-    // const eighthDiv = document.getElementById('position8')
     let neptuneInput = document.createElement("input");
 
     neptuneInput.type = "text";
@@ -638,6 +633,8 @@ function showRoom(currentRoom) {
   }
 
 }
+
+// Function that Displays the Educational Content in the Right Monitor of the Center Room
 
 function showInfo() {
   const monitorInfo = document.getElementById("monitorInfo");
@@ -859,25 +856,30 @@ function verifySolarSystemPuzzle() {
 
   solarSystemStatus = false
 
-  // Array com as ordens corretas dos planetas
+  // Array that Stores the Correct Orders of the Planets 
+
   const correctOrder = ['1', '2', '3', '4', '5', '6', '7', '8'];
   const planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
-  // Variável para controlar se todas as respostas estão corretas
+
+  // Variable that Controls if All the Answers Are Correct
+
   let allCorrect = true;
 
-  // Percorra os inputs dos planetas
+  // Iterates Over all the PLanets' Inputs
+
   for (let i = 0; i < correctOrder.length; i++) {
     const inputId = `${planets[i]}Input`;
     const inputValue = document.getElementById(inputId).value;
 
-    // Verifique se o valor inserido é diferente da ordem correta
+    // Verifies if the Inserted Value is Diffrent Than the Correct Order
     if (inputValue !== correctOrder[i]) {
-      allCorrect = false; // Pelo menos uma resposta está incorreta
-      break; // Pode parar o loop, já que encontrou uma resposta incorreta
+      allCorrect = false; // At  Least One Answer is Incorrect
+      break; // Breaks the Loop, Since it Found a Wrong Answer
     }
   }
 
-  // Verifique o resultado da verificação
+  // Verifies the Result of the Verifications
+
   if (allCorrect) {
     sucessSound.play();
 
@@ -938,6 +940,8 @@ function moveRight(currentRoom) {
   return currentRoom;
 }
 
+// Function that Shows the Challenges on the Left Monitor
+
 function showChallengeMonitor(currentChallenge) {
   const monitorChallenge = document.getElementById("monitorChallenges");
   if (currentChallenge === 1) {
@@ -980,6 +984,7 @@ function showChallengeMonitor(currentChallenge) {
     var rightArrowButton = document.getElementById("rightArrowChallengeMonitor");
 
     // Unlocks the Button to Go to the Next Challenge in the Center Room's Left Monitor
+
     if (solarSystemStatus) {
       rightArrowButton.disabled = false;
     }
@@ -1023,15 +1028,19 @@ function showChallengeMonitor(currentChallenge) {
 
     answerCells.forEach(function (cell) {
       cell.addEventListener('click', function () {
-        // Remove a classe "selected" de todas as células
+
+        // Removes the class "selected" from all the cells
+
         answerCells.forEach(function (cell) {
           cell.classList.remove('selected');
         });
 
-        // Adiciona a classe "selected" à célula clicada
+        // Adds the Class "Selected" to the Clicked Cell
+
         cell.classList.add('selected');
 
-        // Verifica se a célula clicada possui a classe "correctAnswer"
+        // Verifies if the Selected Cell Has the Class "correctAnswer"
+
         if (cell.classList.contains('correctAnswer')) {
           document.getElementById('rightArrowChallengeMonitor').removeAttribute('disabled');
           cell.style.backgroundColor = 'green';
@@ -1074,24 +1083,31 @@ function showChallengeMonitor(currentChallenge) {
 
     answerCells.forEach(function (cell) {
       cell.addEventListener('click', function () {
-        // Remove a classe "selected" de todas as células
+
+        // Removes the class "selected" from all the cells
+
         answerCells.forEach(function (cell) {
           cell.classList.remove('selected');
         });
 
-        // Adiciona a classe "selected" à célula clicada
+        // // Adds the Class "Selected" to the Clicked Cell
         cell.classList.add('selected');
 
-        // Verifica se a célula clicada possui a classe "correctAnswer"
+        // Verifies if the Selected Cell Has the Class "correctAnswer"
+
         if (cell.classList.contains('correctAnswer')) {
-          // Habilita o botão de avançar e preenche o background da célula com verde
+
+          // Enables the Right Arrow Button and Fills the Cell's Background with the Color Green
+
           document.getElementById('rightArrowChallengeMonitor').removeAttribute('disabled');
           cell.style.backgroundColor = 'green';
           progress += 10;
           sucessSound.play();
           updateProgressBar()
         } else {
-          // Desabilita o botão de avançar e remove qualquer cor de background da célula
+
+          // Disables the Right Arrow Button and Removes Any Background Color From the Cell
+
           failSound.play()
           document.getElementById('rightArrowChallengeMonitor').setAttribute('disabled', 'disabled');
           cell.style.backgroundColor = '';
@@ -1133,17 +1149,23 @@ function showChallengeMonitor(currentChallenge) {
 
     answerCells.forEach(function (cell) {
       cell.addEventListener('click', function () {
-        // Remove a classe "selected" de todas as células
+
+        // Removes the class "selected" from all the cells
+
         answerCells.forEach(function (cell) {
           cell.classList.remove('selected');
         });
 
-        // Adiciona a classe "selected" à célula clicada
+        // Adds the Class "Selected" to the Clicked Cell
+
         cell.classList.add('selected');
 
-        // Verifica se a célula clicada possui a classe "correctAnswer"
+        // Verifies if the Selected Cell Has the Class "correctAnswer"
+
         if (cell.classList.contains('correctAnswer')) {
-          // Habilita o botão de avançar e preenche o background da célula com verde
+
+          // Enables the Right Arrow Button and Fills the Cell's Background with the Color Green
+
           cell.style.backgroundColor = 'green';
           progress += 10;
           curChallengesComp += 1;
@@ -1163,7 +1185,9 @@ function showChallengeMonitor(currentChallenge) {
 
         } else {
           failSound.play()
-          // Desabilita o botão de avançar e remove qualquer cor de background da célula
+
+          // Disables the Right Arrow Button and Removes Any Background Color From the Cell
+
           cell.style.backgroundColor = '';
         }
       });
@@ -1317,14 +1341,18 @@ function checkAnswers() {
     }
   }
 
-  //Handles the Funtionalities for Completing the Puzzle(Adds the Progress to the Progress Bar, Adds the Completion of the Challenge to the CompletedC Challenges Text and Plays the Sucess Sound)
+  //Handles the Funtionalities for Completing the Puzzle(Adds the Progress to the Progress Bar, Adds the Completion of the Challenge to the Completed Challenges Text and Plays the Sucess Sound)
 
   if (isCorrect && firstPuzzleStatus != true) {
+
     const firstCodeText = document.getElementById("firstCode");
+
     firstPuzzleCode = generate4DigCode()
     firstCodeText.innerText = firstPuzzleCode
     firstPuzzleStatus = true;
+
     sucessSound.play();
+
     progress += 30;
     curChallengesComp += 1;
     updateProgressBar();

@@ -6,17 +6,23 @@ function createNavbar() {
     User.init();
 
     // Gets the User That is Logged
-    var user= User.getUserLogged(); 
+
+    var user = User.getUserLogged(); 
     
-    // Cria a div da navbar
+    // Gets the Navbar Div and Creates the userPfp
+
     var navbar = document.querySelector("#navbar");
     var rectangle = document.createElement("span");
+    rectangle.className = "rectangle";
+
     var userPfp= document.createElement("div");
+    userPfp.id= "userPfp";
     userPfp.className= "userPfpFrame"
     userPfp.style.backgroundImage= `url(${user.profilePic})`;
-    rectangle.className = "rectangle";
-    console.log(user.profilePic)
-    console.log(user)
+
+    userPfp.addEventListener("click", function(){
+        window.location.href = "../HTML/editProfile.html"
+    })
 
     // Creates the Icon as a Link
 

@@ -69,13 +69,16 @@ export function setBestTime(userBestTime) {
   }
 
   // Check if the index is valid
+
   if (index !== -1) {
     var targetObject = objectArray[index];
     targetObject.bestTime = userBestTime;
     var updatedJsonArray = JSON.stringify(objectArray);
     localStorage.setItem('users', updatedJsonArray);
   } else {
+
     // Handle the case when the index is not found
+
     console.log("User not found in the array");
   }
 }

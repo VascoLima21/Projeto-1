@@ -3,7 +3,6 @@ import * as User from "../modules/userModule.js";
 function userAutenthification() {
     User.init();
 
-    
     document
         .querySelector("#registerForm")
         ?.addEventListener("submit", (event) => {

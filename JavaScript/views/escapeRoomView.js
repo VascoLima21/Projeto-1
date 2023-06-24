@@ -354,31 +354,33 @@ function showRoom(currentRoom) {
     if (lastCodesDone) {
       const shipDoor = document.getElementById("doorShip");
       shipDoor.disabled = false;
-    
+
       shipDoor.addEventListener("click", function () {
         var diffInSeconds = parseInt(totalTime) - parseInt(timeLeft);
         var diffFormatted = convertSecondsToMMSS(diffInSeconds);
-    
+
         pauseTimer();
-    
+
         let completionTimeElement = document.getElementById("completionTime");
         completionTimeElement.innerText = diffFormatted;
-    
-        User.setBestTime(diffFormatted);
-    
+        
+        if (User.getUserLogged().bestTime > diffFormatted) {
+          User.bestTime=diffFormatted;
+        }
+
         doorOpening.play();
-    
+
         $('#completionModal').modal('show'); // Show the modal
-    
+
         // Configures the Event for When the Modal is Closed
         $('#completionModal').on('hidden.bs.modal', function () {
           // Redirects to the HomePage
           window.location.href = '../HTML/homePage.html';
         });
-    
+
       });
     }
-    
+
     const btnLocker = document.getElementById("locker");
     firstHalfText = document.getElementById("firstHalf")
 
@@ -881,6 +883,7 @@ function verifySolarSystemPuzzle() {
   // Verifies the Result of the Verifications
 
   if (allCorrect) {
+    const btnSolarSystemSubmit = document.getElementById("btnSubmitSolarSystemPuzzle")
     sucessSound.play();
 
     solarSystemStatus = true;
@@ -896,14 +899,13 @@ function verifySolarSystemPuzzle() {
     alertModaltxtContainer.textContent = "Correct! You Have Unlocked the Key to the Locker!"
     $('#alertModal').modal('show');
     rightArrowClicked = true;
+    btnSolarSystemSubmit.disabled = true;
 
   } else {
     failSound.play()
     alertModaltxtContainer.textContent = "Incorrect. Try Again!"
     $('#alertModal').modal('show');
   }
-  const btnSolarSystemSubmit = document.getElementById("btnSubmitSolarSystemPuzzle")
-  btnSolarSystemSubmit.disabled = true;
 }
 
 function handleLeftArrowClick() {
